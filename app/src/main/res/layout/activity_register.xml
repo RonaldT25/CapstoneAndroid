@@ -37,24 +37,67 @@
         android:contentDescription="@string/logo" />
 
     <EditText
-        android:id="@+id/editTextLogin"
+        android:id="@+id/editTextName"
         android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="264dp"
+        android:layout_marginTop="216dp"
         android:layout_marginEnd="8dp"
+        android:autofillHints=""
         android:background="@drawable/round_border"
         android:drawableStart="@drawable/ic_person"
         android:drawablePadding="16dp"
+        android:hint="@string/name"
+        android:inputType="text"
         android:paddingStart="30dp"
-        android:hint="@string/username"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints=""
-        android:inputType="text"
         tools:ignore="RtlSymmetry" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="8dp"
+        android:autofillHints=""
+        android:background="@drawable/round_border"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="16dp"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="30dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/editTextName"
+        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintStart_toStartOf="@id/editTextName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName"
+        tools:ignore="RtlSymmetry" />
+
+    <EditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/round_border"
+        android:drawableStart="@drawable/ic_phone"
+        android:drawablePadding="16dp"
+        android:hint="@string/phone_number"
+        android:paddingStart="30dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
+        app:layout_constraintStart_toStartOf="@+id/editTextEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        tools:ignore="RtlSymmetry"
+        android:autofillHints="Password"
+        android:inputType="phone" />
+
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -69,28 +112,28 @@
         android:hint="@string/password"
         android:paddingStart="30dp"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextLogin"
-        app:layout_constraintStart_toStartOf="@+id/editTextLogin"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLogin"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPhoneNumber"
+        app:layout_constraintStart_toStartOf="@+id/editTextPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber"
         tools:ignore="RtlSymmetry"
         android:autofillHints="Password"
         android:inputType="textPassword" />
+
+
     <Button
         android:id="@+id/btnLogin"
-        android:shadowColor="@color/black"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_margin="40dp"
         android:background="@drawable/round_bg"
+        android:contentDescription="@string/logo"
+        android:shadowColor="@color/black"
         android:text="@string/register"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
-        android:contentDescription="@string/logo"/>
-
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
     <Button
         android:id="@+id/forgotPassword"
@@ -100,7 +143,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/forgot_password"
+        android:text="@string/loginnow"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
