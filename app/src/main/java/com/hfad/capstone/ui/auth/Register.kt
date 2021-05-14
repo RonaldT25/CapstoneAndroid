@@ -3,6 +3,8 @@ package com.hfad.capstone.ui.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.RadioButton
 import com.hfad.capstone.R
 import com.hfad.capstone.databinding.ActivityLoginBinding
 import com.hfad.capstone.databinding.ActivityRegisterBinding
@@ -20,5 +22,9 @@ class Register : AppCompatActivity() {
             val intent = Intent(this,Login::class.java)
             startActivity(intent)
         }
+
+
     }
+
+
 }

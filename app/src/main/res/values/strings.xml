@@ -19,4 +19,7 @@
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="phone_number">Phone number</string>
+    <string name="seller">Seller</string>
+    <string name="user">User</string>
+    <string name="role">ROLE</string>
 </resources>
