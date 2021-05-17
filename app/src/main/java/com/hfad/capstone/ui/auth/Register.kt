@@ -4,17 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-import android.view.View
-import android.widget.RadioButton
 import android.widget.Toast
-import androidx.core.view.isEmpty
+import android.widget.Toast.LENGTH_SHORT
 import com.hfad.capstone.API.ClientRetrofit
 import com.hfad.capstone.R
-import com.hfad.capstone.data.RegisterUser
-import com.hfad.capstone.data.User
-import com.hfad.capstone.databinding.ActivityLoginBinding
+import com.hfad.capstone.data.ResponseAuth
 import com.hfad.capstone.databinding.ActivityRegisterBinding
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -74,13 +69,12 @@ class Register : AppCompatActivity() {
                 binding.editTextEmail.text.toString(),
                 binding.editTextPassword.text.toString(),
                 role
-            ).enqueue(object : Callback<RegisterUser> {
-                override fun onResponse(call: Call<RegisterUser>, response: Response<RegisterUser>
-                ) {
+            ).enqueue(object : Callback<ResponseAuth> {
+                override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
 
                 }
 
-                override fun onFailure(call: Call<RegisterUser>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseAuth>, t: Throwable) {
 
                 }
             })
