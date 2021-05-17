@@ -19,4 +19,7 @@
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="phone_number">Phone number</string>
+    <string name="register_success">Register Success!</string>
+    <string name="login_success">Login Success</string>
+    <string name="register_failed">Register Failed</string>
 </resources>
