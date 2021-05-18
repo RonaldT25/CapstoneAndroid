@@ -19,7 +19,16 @@
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="phone_number">Phone number</string>
+    <string name="seller">Seller</string>
+    <string name="user">User</string>
+    <string name="role">ROLE</string>
+    <string name="usernamewarning">Kolom Username tidak boleh kosong</string>
+    <string name="emailwarning">Kolom Email tidak boleh kosong</string>
+    <string name="emailnotvalidwarning">Alamat Email tidak valid</string>
+    <string name="passwordwarning">Kolom Password tidak boleh kosong</string>
+    <string name="rolewarning">Kolom Role tidak boleh kosong</string>
     <string name="register_success">Register Success!</string>
     <string name="login_success">Login Success</string>
     <string name="register_failed">Register Failed</string>
+
 </resources>
