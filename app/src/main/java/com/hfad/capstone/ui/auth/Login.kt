@@ -50,7 +50,9 @@ class Login : AppCompatActivity() {
                     binding.editTextPassword.text.toString()
             ).enqueue(object : Callback<ResponseAuth> {
                 override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
+                    if (response.isSuccessful){
 
+                    }
                 }
 
                 override fun onFailure(call: Call<ResponseAuth>, t: Throwable) {
