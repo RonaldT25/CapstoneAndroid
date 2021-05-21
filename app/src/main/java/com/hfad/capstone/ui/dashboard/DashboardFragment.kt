@@ -11,25 +11,12 @@ import com.hfad.capstone.R
 import com.hfad.capstone.databinding.FragmentDashboardBinding
 
 
-class dashboard : Fragment() {
-
-    private var _binding: FragmentDashboardBinding? = null
-    private val binding get() = _binding!!
+class DashboardFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    ): View? {
+        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 }

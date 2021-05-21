@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_dashboard" />
+    <item
+        android:id="@+id/navigation_penjualan"
+        android:icon="@drawable/ic_baseline_production_quantity_limits_24"
+        android:title="@string/title_penjualan" />
+    <item
+        android:id="@+id/navigation_produk"
+        android:icon="@drawable/ic_baseline_shopping_bag_24"
+        android:title="@string/title_produk" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="@string/title_profile" />
+</menu>
