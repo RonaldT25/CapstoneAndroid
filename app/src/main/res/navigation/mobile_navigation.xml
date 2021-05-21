@@ -13,13 +13,13 @@
         android:id="@+id/navigation_penjualan"
         android:name="com.hfad.capstone.ui.penjualan.PenjualanFragment"
         android:label="@string/title_penjualan"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_penjualan" />
 
     <fragment
         android:id="@+id/navigation_produk"
         android:name="com.hfad.capstone.ui.produk.ProdukFragment"
         android:label="@string/title_produk"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_produk" />
 
     <fragment
         android:id="@+id/navigation_profile"
