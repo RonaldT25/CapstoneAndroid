@@ -7,11 +7,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.hfad.capstone.API.ClientRetrofit
 import com.hfad.capstone.MainActivity
 import com.hfad.capstone.R
+import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.ResponseAuth
 import com.hfad.capstone.databinding.ActivityLoginBinding
+import com.hfad.capstone.helper.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,12 +20,13 @@ import retrofit2.Response
 class Login : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sessionManager = SessionManager(this)
 
         binding.forgotPassword.setOnClickListener{
             val intent = Intent(this,Register::class.java)
@@ -53,8 +55,8 @@ class Login : AppCompatActivity() {
             ).enqueue(object : Callback<ResponseAuth> {
                 override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
                     if (response.isSuccessful){
+                        response.body()?.let { sessionManager.saveAuthToken(it.token) }
                         loginSuccess()
-
                     }
                     else{
                         loginFailed()

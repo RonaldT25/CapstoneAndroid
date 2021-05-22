@@ -1,16 +1,17 @@
-package com.hfad.capstone.API
+package com.hfad.capstone.api
 
 
+import com.hfad.capstone.data.Product
 import com.hfad.capstone.data.ResponseAuth
+import com.hfad.capstone.data.User
+import com.hfad.capstone.helper.Constants
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface Api {
 
 
-    @POST("api/users/register")
+    @POST(Constants.REGISTER_URL)
     @FormUrlEncoded
     fun register(
         @Field("username") username:String,
@@ -20,13 +21,18 @@ interface Api {
     ): Call<ResponseAuth>
 
 
-    @POST("api/users/login")
+    @POST(Constants.LOGIN_URL)
     @FormUrlEncoded
     fun login(
             @Field("username") username:String,
             @Field("password") password:String
     ): Call<ResponseAuth>
 
+    @GET(Constants.GETPROFILE_URL)
+     fun getProfile(@Header("auth-token") token:String ) : Call<User>
+
+    @GET(Constants.READPRODUCT_URL)
+    fun readProduct(@Header("auth-token") token:String ) : Call<List<Product>>
 
 
 }

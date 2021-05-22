@@ -3,14 +3,13 @@ package com.hfad.capstone.ui.auth
 import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.hfad.capstone.API.ClientRetrofit
-import com.hfad.capstone.MainActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.hfad.capstone.R
+import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.ResponseAuth
 import com.hfad.capstone.databinding.ActivityRegisterBinding
 import retrofit2.Call
@@ -25,7 +24,6 @@ class Register : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.forgotPassword.setOnClickListener {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)

@@ -30,7 +30,7 @@
     <string name="register_success">Register Success!</string>
     <string name="login_success">Login Success</string>
     <string name="register_failed">Register Failed</string>
-    <string name="example">Halo, Username</string>
+    <string name="example">Halo, </string>
     <string name="title_dashboard">Dasbor</string>
     <string name="title_penjualan">Penjualan</string>
     <string name="title_produk">Produk</string>
