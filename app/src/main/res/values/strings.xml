@@ -35,7 +35,10 @@
     <string name="title_penjualan">Penjualan</string>
     <string name="title_produk">Produk</string>
     <string name="title_profile">Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_description">Image</string>
+    <string name="text_primary">Sample of title text</string>
+    <string name="text_subtitle">Sample of subtitle text</string>
+    <string name="something_wrong">Oops.. something went wrong</string>
+
 
 </resources>
