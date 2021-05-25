@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="4dp"
+    android:layout_marginTop="7dp"
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="4dp"
     app:cardCornerRadius="16dp">
@@ -30,10 +30,12 @@
 
         <TextView
             android:id="@+id/tv_item_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="117dp"
+            android:layout_height="66dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:lines="3"
+            android:maxLines="3"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/iv_item_image"
             app:layout_constraintEnd_toEndOf="parent"
