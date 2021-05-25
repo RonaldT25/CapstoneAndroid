@@ -39,6 +39,12 @@
     <string name="text_primary">Sample of title text</string>
     <string name="text_subtitle">Sample of subtitle text</string>
     <string name="something_wrong">Oops.. something went wrong</string>
+    <string name="detail">Detail Produk</string>
+    <string name="detail_harga">Harga Satuan</string>
+    <string name="detail_tautan">Tautan Tokopedia</string>
+    <string name="save">Simpan</string>
+    <string name="detailBahanBaku"><u>Detail Bahan Baku</u></string>
+    <string name="detailPenunjang"><u>Penunjang Keputusan</u></string>
 
 
 </resources>

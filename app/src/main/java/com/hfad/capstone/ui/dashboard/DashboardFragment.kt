@@ -27,6 +27,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun getProfile(){
+
         sessionManager.fetchAuthToken()?.let {
             ClientRetrofit.instanceRetrofit.getProfile(it).enqueue(object : Callback<User> {
             @SuppressLint("SetTextI18n")

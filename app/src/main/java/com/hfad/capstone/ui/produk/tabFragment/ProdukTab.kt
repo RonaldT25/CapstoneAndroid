@@ -1,18 +1,18 @@
 package com.hfad.capstone.ui.produk.tabFragment
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.Product
-import com.hfad.capstone.databinding.FragmentProdukBinding
 import com.hfad.capstone.databinding.FragmentProdukTabBinding
 import com.hfad.capstone.helper.ProdukAdapter
 import com.hfad.capstone.helper.SessionManager
+import com.hfad.capstone.ui.DetailActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +32,7 @@ class ProdukTab : Fragment() {
         getProducts()
     }
     private fun getProducts(){
+
         val produkAdapter = ProdukAdapter()
 
         sessionManager.fetchAuthToken()?.let {
@@ -40,9 +41,9 @@ class ProdukTab : Fragment() {
                   val  listProduct = response.body()!!
                     listProduct?.let {
                         produkAdapter.onItemClick = { selectedData ->
-                            //        val intent = Intent(activity, DetailMovieActivity::class.java)
-                            //        intent.putExtra(DetailMovieActivity.EXTRA_DATA, selectedData)
-                            //        startActivity(intent)
+                                    val intent = Intent(activity, DetailActivity::class.java)
+                                   intent.putExtra(DetailActivity.EXTRA_PRODUCT, selectedData)
+                                   startActivity(intent)
                         }
 
                         produkAdapter.setData(listProduct)
