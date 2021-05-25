@@ -27,7 +27,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <FrameLayout
             android:id="@+id/main_frame"
@@ -39,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:elevation="10dp"
             android:background="@drawable/shape_bg"
             android:backgroundTint="@color/white"
             android:padding="8dp"

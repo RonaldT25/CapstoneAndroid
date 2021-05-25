@@ -51,6 +51,8 @@ interface Api {
                       @Field("unit") unit:String,
                       @Header("auth-token") token:String ) : Call<updateResponse>
 
+    @GET(Constants.READSTORE_URL)
+    fun readStore(@Header("auth-token") token:String ) : Call<StoreResponse>
 
 
 }

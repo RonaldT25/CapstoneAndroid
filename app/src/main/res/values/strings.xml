@@ -47,6 +47,20 @@
     <string name="detailPenunjang"><u>Penunjang Keputusan</u></string>
     <string name="detailComposition">Detail Bahan</string>
     <string name="detailCompositionUnit">Satuan</string>
-
+    <string name="profilepengguna">Profil Pengguna</string>
+    <string name="nama_pengguna">  Nama Pengguna</string>
+    <string name="input_name">Masukkan Nama Pengguna</string>
+    <string name="nama_lengkap">  Nama Lengkap</string>
+    <string name="input_nama_lengkap">Masukkan Nama Lengkap</string>
+    <string name="nama_email">  Nama Email</string>
+    <string name="input_email">Masukkan Email</string>
+    <string name="edit_profile">EDIT PROFILE</string>
+    <string name="profile_toko">Profil Toko</string>
+    <string name="nama_toko">Nama Toko</string>
+    <string name="input_toko_name">Masukkan Nama Toko</string>
+    <string name="deskripsi_toko">Deskripsi Toko</string>
+    <string name="input_deskripsi">Deskripsi Toko</string>
+    <string name="unitwarning">Kolom Unit tidak boleh kosong</string>
+    <string name="pricewarning">Kolom Harga tidak boleh kosong</string>
 
 </resources>

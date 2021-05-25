@@ -1,70 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.DetailActivity">
 
-    <TextView
-        android:id="@+id/detailcomposition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/detailComposition"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.176"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.091" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/detail_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:layout_marginTop="25dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:contentPaddingBottom="16dp"
+        app:contentPaddingLeft="16dp"
+        app:contentPaddingRight="16dp"
+>
 
-    <TextView
-        android:id="@+id/detail_composition_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/example"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/detailcomposition"
-        app:layout_constraintTop_toBottomOf="@+id/detailcomposition" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/detail_composition_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/detailCompositionUnit"
-        app:layout_constraintStart_toStartOf="@+id/detail_composition_title"
-        app:layout_constraintTop_toBottomOf="@+id/detail_composition_title" />
+            <TextView
+                android:id="@+id/detailcomposition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/detailComposition"
+                android:textColor="@color/darkblue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextUnit"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
-        android:autofillHints="@string/detailCompositionUnit"
-        android:drawablePadding="16dp"
-        android:hint="@string/detailCompositionUnit"
-        android:inputType="text"
-        android:paddingStart="30dp"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@+id/detail_composition_unit"
-        app:layout_constraintTop_toBottomOf="@+id/detail_composition_unit"
-        tools:ignore="RtlSymmetry" />
+            <TextView
+                android:id="@+id/detail_composition_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:minHeight="32dp"
+                android:text="@string/example"
+                android:textAllCaps="true"
+                android:textColor="@color/lightblue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailcomposition" />
 
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_margin="40dp"
-        android:background="@drawable/round_bg"
-        android:contentDescription="@string/logo"
-        android:shadowColor="@color/black"
-        android:text="@string/save"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUnit" />
+            <TextView
+                android:id="@+id/detail_composition_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:minHeight="32dp"
+                android:text="@string/detailCompositionUnit"
+                android:textAllCaps="true"
+                android:textColor="@color/lightblue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/detail_composition_title"
+                app:layout_constraintTop_toBottomOf="@+id/detail_composition_title" />
 
+            <EditText
+                android:id="@+id/editTextUnit"
+                android:layout_width="334dp"
+                android:layout_height="59dp"
+                android:autofillHints="@string/detailCompositionUnit"
+                android:drawablePadding="16dp"
+                android:hint="@string/detailCompositionUnit"
+                android:inputType="text"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/detail_composition_unit"
+                app:layout_constraintTop_toBottomOf="@+id/detail_composition_unit"
+                tools:ignore="RtlSymmetry">
+            </EditText>
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_margin="40dp"
+                android:background="@drawable/round_bg"
+                android:contentDescription="@string/logo"
+                android:shadowColor="@color/black"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextUnit" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
