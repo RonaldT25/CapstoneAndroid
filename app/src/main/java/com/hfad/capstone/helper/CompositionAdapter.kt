@@ -1,0 +1,49 @@
+package com.hfad.capstone.helper
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.hfad.capstone.R
+import com.hfad.capstone.data.Composition
+import com.hfad.capstone.databinding.ItemListCompositionBinding
+import java.util.*
+
+class CompositionAdapter : RecyclerView.Adapter<CompositionAdapter.ListViewHolder>() {
+
+    private var listData = ArrayList<Composition>()
+    var onItemClick: ((Composition) -> Unit)? = null
+
+    fun setData(newListData: List<Composition>?) {
+        if (newListData == null) return
+        listData.clear()
+        listData.addAll(newListData)
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_composition, parent, false))
+
+    override fun getItemCount() = listData.size
+
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+        val data = listData[position]
+        holder.bind(data)
+    }
+
+    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val binding = ItemListCompositionBinding.bind(itemView)
+        fun bind(data: Composition) {
+            with(binding) {
+                tvCompositionTitle.text = data.compositionName
+                tvCompositionUnit.text = data.unit
+            }
+        }
+
+        init {
+            binding.root.setOnClickListener {
+                onItemClick?.invoke(listData[adapterPosition])
+            }
+        }
+    }
+}

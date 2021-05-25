@@ -48,7 +48,7 @@ class ProdukTab : Fragment() {
 
                         produkAdapter.setData(listProduct)
 
-                        with(binding.rvMovie) {
+                        with(binding.rvProduct) {
                             layoutManager = LinearLayoutManager(context)
                             setHasFixedSize(true)
                             adapter = produkAdapter

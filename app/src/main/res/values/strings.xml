@@ -45,6 +45,8 @@
     <string name="save">Simpan</string>
     <string name="detailBahanBaku"><u>Detail Bahan Baku</u></string>
     <string name="detailPenunjang"><u>Penunjang Keputusan</u></string>
+    <string name="detailComposition">Detail Bahan</string>
+    <string name="detailCompositionUnit">Satuan</string>
 
 
 </resources>

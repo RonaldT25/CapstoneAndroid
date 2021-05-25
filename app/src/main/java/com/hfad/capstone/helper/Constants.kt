@@ -6,4 +6,5 @@ object Constants {
     const val LOGIN_URL = "api/users/login"
     const val GETPROFILE_URL = "api/users/profile/"
     const val READPRODUCT_URL = "api/users/stores/products/"
+    const val READCOMPOSITION_URL = "api/users/stores/compositions/"
 }

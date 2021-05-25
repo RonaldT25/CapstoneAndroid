@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hfad.capstone">
+    package="com.hfad.capstone" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,19 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Capstone.noActionBar"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".ui.DetailActivity"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".ui.DetailComposition"
             android:theme="@style/Theme.Capstone">
-
+        </activity>
+        <activity
+            android:name=".ui.DetailActivity"
+            android:theme="@style/Theme.Capstone" >
         </activity>
         <activity android:name=".ui.auth.Register" />
-        <activity android:name=".ui.auth.Login">
+        <activity android:name=".ui.auth.Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
