@@ -20,6 +20,8 @@ import retrofit2.Response
 class ProdukTab : Fragment() {
     private var _binding: FragmentProdukTabBinding? = null
     private val binding get() = _binding!!
+
+
     private lateinit var sessionManager: SessionManager
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentProdukTabBinding.inflate(inflater, container, false)
@@ -38,12 +40,12 @@ class ProdukTab : Fragment() {
         sessionManager.fetchAuthToken()?.let {
             ClientRetrofit.instanceRetrofit.readProduct(it).enqueue(object : Callback<List<Product>> {
                 override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
-                  val  listProduct = response.body()!!
+                    val  listProduct = response.body()!!
                     listProduct?.let {
                         produkAdapter.onItemClick = { selectedData ->
-                                    val intent = Intent(activity, DetailActivity::class.java)
-                                   intent.putExtra(DetailActivity.EXTRA_PRODUCT, selectedData)
-                                   startActivity(intent)
+                            val intent = Intent(activity, DetailActivity::class.java)
+                            intent.putExtra(DetailActivity.EXTRA_PRODUCT, selectedData)
+                            startActivity(intent)
                         }
 
                         produkAdapter.setData(listProduct)
@@ -64,6 +66,8 @@ class ProdukTab : Fragment() {
             })
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

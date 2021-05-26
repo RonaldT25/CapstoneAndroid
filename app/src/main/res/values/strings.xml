@@ -62,5 +62,12 @@
     <string name="input_deskripsi">Deskripsi Toko</string>
     <string name="unitwarning">Kolom Unit tidak boleh kosong</string>
     <string name="pricewarning">Kolom Harga tidak boleh kosong</string>
-
+    <string name="newproduk">Produk Baru</string>
+    <string name="newbahan">Bahan Baru</string>
+    <string name="produk">Produk</string>
+    <string name="bahan">Bahan</string>
+    <string name="input_produk_name">Masukkan Nama Produk</string>
+    <string name="input_bahan_name">Masukkan Nama Bahan</string>
+    <string name="input_produk_harga">0</string>
+    <string name="input_produk_tautan">Tautan Produk Tokopedia</string>
 </resources>

@@ -49,13 +49,14 @@
             app:tabTextAppearance="@style/customTabStyle"
             app:tabTextColor="#031370" />
     </androidx.viewpager.widget.ViewPager>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="616dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="590dp"
         android:src="@drawable/ic_baseline_add_24"
         app:backgroundTint="#03A9F4"
         app:layout_constraintStart_toStartOf="parent"

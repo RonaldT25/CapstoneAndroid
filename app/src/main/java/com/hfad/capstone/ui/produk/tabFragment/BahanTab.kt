@@ -43,7 +43,7 @@ class BahanTab : Fragment() {
                     listComposition?.let {
                         compositionAdapter.onItemClick = { selectedData ->
                             val intent = Intent(activity, DetailComposition::class.java)
-                           intent.putExtra(DetailComposition.EXTRA_COMPOSITION, selectedData)
+                            intent.putExtra(DetailComposition.EXTRA_COMPOSITION, selectedData)
                             startActivity(intent)
                         }
 
