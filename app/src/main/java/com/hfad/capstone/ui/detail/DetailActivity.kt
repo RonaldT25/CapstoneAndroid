@@ -4,12 +4,14 @@ package com.hfad.capstone.ui.detail
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import com.hfad.capstone.MainActivity
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.Product
+import com.hfad.capstone.data.ReviewResponse
 import com.hfad.capstone.data.updateResponse
 import com.hfad.capstone.databinding.ActivityDetailBinding
 import com.hfad.capstone.helper.SessionManager
@@ -47,7 +49,12 @@ class DetailActivity : AppCompatActivity() {
         binding.deleteProduct.setOnClickListener {
             delete()
         }
+        binding.buttonAnalisaUlasan.setOnClickListener{
+            analyze()
+        }
     }
+
+
     private fun update(){
         if (binding.editTextHarga.text.isEmpty()) {
             binding.editTextHarga.error = getText(R.string.usernamewarning)
@@ -93,6 +100,29 @@ class DetailActivity : AppCompatActivity() {
                     override fun onFailure(call: Call<updateResponse>, t: Throwable) {
 
                     }
+
+                })
+            }
+        }
+    }
+
+    private fun analyze() {
+        binding.progressBar.visibility = View.VISIBLE
+        sessionManager.fetchAuthToken()?.let {
+            extras?.let { it1 ->
+                ClientRetrofit.instanceRetrofit.readCrawlKomentar(
+                        it1.id,
+                        it
+                ).enqueue(object : Callback<ReviewResponse> {
+                    override fun onResponse(call: Call<ReviewResponse>, response: Response<ReviewResponse>) {
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(this@DetailActivity, response.body()?.neutral?.get(0).toString(), LENGTH_SHORT).show()
+                    }
+
+                    override fun onFailure(call: Call<ReviewResponse>, t: Throwable) {
+
+                    }
+
 
                 })
             }

@@ -8,6 +8,11 @@ import retrofit2.http.*
 
 interface Api {
 
+    @POST(Constants.SESSION_URL)
+    @FormUrlEncoded
+    fun checkToken(
+            @Field("token") token:String,
+    ): Call<ResponseAuth>
 
     @POST(Constants.REGISTER_URL)
     @FormUrlEncoded
@@ -99,5 +104,12 @@ interface Api {
     fun updateStore(@Header("auth-token") token:String,
                     @Field("storeName") storeName:String,
                     @Field("description") description:String,) : Call<updateResponse>
+
+    @GET("api/users/stores/products/{productId}/reviews")
+    fun readCrawlKomentar(@Path("productId") productId:Int,
+                          @Header("auth-token") token:String ) : Call<ReviewResponse>
+
+
+
 
 }

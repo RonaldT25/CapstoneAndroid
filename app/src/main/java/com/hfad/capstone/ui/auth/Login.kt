@@ -5,12 +5,14 @@ import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.hfad.capstone.MainActivity
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.ResponseAuth
+import com.hfad.capstone.data.StoreResponse
 import com.hfad.capstone.databinding.ActivityLoginBinding
 import com.hfad.capstone.helper.SessionManager
 import retrofit2.Call
@@ -27,7 +29,7 @@ class Login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sessionManager = SessionManager(this)
-
+        checkToken()
         binding.forgotPassword.setOnClickListener{
             val intent = Intent(this,Register::class.java)
             startActivity(intent)
@@ -39,6 +41,7 @@ class Login : AppCompatActivity() {
     }
 
     private fun login(){
+        binding.progressBar.visibility = View.VISIBLE
         if (binding.editTextLogin.text.isEmpty()) {
             binding.editTextLogin.error = getText(R.string.usernamewarning)
             binding.editTextLogin.requestFocus()
@@ -55,6 +58,7 @@ class Login : AppCompatActivity() {
             ).enqueue(object : Callback<ResponseAuth> {
                 override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
                     if (response.isSuccessful){
+                        binding.progressBar.visibility = View.GONE
                         response.body()?.let { sessionManager.saveAuthToken(it.token) }
                         loginSuccess()
                     }
@@ -101,6 +105,28 @@ class Login : AppCompatActivity() {
         }
         val alertDialog = builder.create()
         alertDialog.show()
+    }
+
+    private fun checkToken(){
+        binding.progressBar.visibility = View.VISIBLE
+        sessionManager.fetchAuthToken()?.let {
+            ClientRetrofit.instanceRetrofit.checkToken(it).enqueue(object : Callback<ResponseAuth> {
+                override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
+                    binding.progressBar.visibility = View.GONE
+                    if (response.body()?.auth == true){
+                        val intent = Intent(this@Login,MainActivity::class.java)
+                        startActivity(intent)
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ResponseAuth>, t: Throwable) {
+
+                }
+
+
+            })
+        }
     }
 
 
