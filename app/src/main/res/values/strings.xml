@@ -70,4 +70,9 @@
     <string name="input_bahan_name">Masukkan Nama Bahan</string>
     <string name="input_produk_harga">0</string>
     <string name="input_produk_tautan">Tautan Produk Tokopedia</string>
+    <string name="ganti_sandi"><u>Ganti Sandi</u></string>
+    <string name="ubah_sandi">Ubah Sandi</string>
+    <string name="sandi_baru">Kata Sandi Baru</string>
+    <string name="input_sandi">Masukkan Sandi Baru</string>
+
 </resources>

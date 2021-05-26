@@ -12,7 +12,7 @@ import com.hfad.capstone.data.Product
 import com.hfad.capstone.databinding.FragmentProdukTabBinding
 import com.hfad.capstone.helper.ProdukAdapter
 import com.hfad.capstone.helper.SessionManager
-import com.hfad.capstone.ui.DetailActivity
+import com.hfad.capstone.ui.detail.DetailActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

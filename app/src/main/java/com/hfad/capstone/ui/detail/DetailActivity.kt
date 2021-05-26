@@ -1,7 +1,6 @@
-package com.hfad.capstone.ui
+package com.hfad.capstone.ui.detail
 
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,12 +10,9 @@ import com.hfad.capstone.MainActivity
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.Product
-import com.hfad.capstone.data.ResponseAuth
-import com.hfad.capstone.data.User
 import com.hfad.capstone.data.updateResponse
 import com.hfad.capstone.databinding.ActivityDetailBinding
 import com.hfad.capstone.helper.SessionManager
-import com.hfad.capstone.ui.produk.ProdukFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,6 +44,9 @@ class DetailActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener{
             update()
         }
+        binding.deleteProduct.setOnClickListener {
+            delete()
+        }
     }
     private fun update(){
         if (binding.editTextHarga.text.isEmpty()) {
@@ -77,7 +76,26 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    private fun delete(){
+        sessionManager.fetchAuthToken()?.let {
+            extras?.let { it1 ->
+                ClientRetrofit.instanceRetrofit.deleteProduct(
+                    it1.id,
+                    it
+                ).enqueue(object : Callback<updateResponse> {
+                    override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
+                        Toast.makeText(this@DetailActivity, response.body()?.message,LENGTH_SHORT).show()
+                        val intent = Intent(this@DetailActivity, MainActivity::class.java)
+                        startActivity(intent)
+                    }
 
+                    override fun onFailure(call: Call<updateResponse>, t: Throwable) {
 
+                    }
+
+                })
+            }
+        }
     }
 }

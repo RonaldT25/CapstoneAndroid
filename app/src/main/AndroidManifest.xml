@@ -12,16 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Capstone.noActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.AddActivity">
+        <activity android:name=".ui.ChangePasswordActivity">
             android:theme="@style/Theme.Capstone">
 
         </activity>
+        <activity android:name=".ui.add.AddActivity">
+            android:theme="@style/Theme.Capstone">
+        </activity>
         <activity
-            android:name=".ui.DetailComposition"
-            android:theme="@style/Theme.Capstone"></activity>
+            android:name=".ui.detail.DetailComposition"
+            android:theme="@style/Theme.Capstone" />
         <activity
-            android:name=".ui.DetailActivity"
-            android:theme="@style/Theme.Capstone"></activity>
+            android:name=".ui.detail.DetailActivity"
+            android:theme="@style/Theme.Capstone" />
         <activity android:name=".ui.auth.Register" />
         <activity android:name=".ui.auth.Login">
             <intent-filter>

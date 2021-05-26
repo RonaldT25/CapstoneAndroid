@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.hfad.capstone.databinding.FragmentProdukBinding
 import com.hfad.capstone.helper.SectionPagerAdapter
-import com.hfad.capstone.ui.AddActivity
+import com.hfad.capstone.ui.add.AddActivity
 import com.hfad.capstone.ui.produk.tabFragment.BahanTab
 import com.hfad.capstone.ui.produk.tabFragment.ProdukTab
 

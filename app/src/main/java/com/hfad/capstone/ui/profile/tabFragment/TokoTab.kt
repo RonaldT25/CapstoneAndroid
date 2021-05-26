@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.StoreResponse
+import com.hfad.capstone.data.updateResponse
 import com.hfad.capstone.databinding.FragmentTokoTabBinding
 import com.hfad.capstone.helper.SessionManager
 import retrofit2.Call
@@ -24,6 +26,9 @@ class TokoTab : Fragment() {
         _binding = FragmentTokoTabBinding.inflate(inflater, container, false)
         sessionManager = SessionManager(this.requireContext())
         getStore()
+        binding.btnLogin.setOnClickListener {
+            updateStore()
+        }
         return binding.root
     }
 
@@ -36,6 +41,29 @@ class TokoTab : Fragment() {
                 }
 
                 override fun onFailure(call: Call<StoreResponse>, t: Throwable) {
+
+                }
+
+
+            })
+        }
+    }
+
+    private fun updateStore(){
+        if (binding.inputNama.text.isEmpty()) {
+            binding.inputNama.error = getText(R.string.usernamewarning)
+            binding.inputNama.requestFocus()
+        }
+        sessionManager.fetchAuthToken()?.let {
+            ClientRetrofit.instanceRetrofit.updateStore(it,
+                binding.inputNama.text.toString(),
+                binding.deskripsiToko.text.toString()
+            ).enqueue(object : Callback<updateResponse> {
+                override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
+                    Toast.makeText(context, response.body()?.message,LENGTH_SHORT).show()
+                }
+
+                override fun onFailure(call: Call<updateResponse>, t: Throwable) {
 
                 }
 

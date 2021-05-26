@@ -1,11 +1,8 @@
-package com.hfad.capstone.ui
+package com.hfad.capstone.ui.add
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
 import com.hfad.capstone.R
-import com.hfad.capstone.data.Product
 
 class AddActivity : AppCompatActivity() {
     companion object{

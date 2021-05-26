@@ -1,4 +1,4 @@
-package com.hfad.capstone.ui
+package com.hfad.capstone.ui.detail
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +41,9 @@ class DetailComposition : AppCompatActivity() {
         binding.btnSave.setOnClickListener{
             update()
         }
+        binding.deleteComposition.setOnClickListener {
+            delete()
+        }
     }
 
     private fun update() {
@@ -71,6 +74,27 @@ class DetailComposition : AppCompatActivity() {
                 }
             }
         }
+    }
 
+    private fun delete(){
+        sessionManager.fetchAuthToken()?.let {
+            extras?.let { it1 ->
+                ClientRetrofit.instanceRetrofit.deleteComposition(
+                    it1.id,
+                    it
+                ).enqueue(object : Callback<updateResponse> {
+                    override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
+                        Toast.makeText(this@DetailComposition, response.body()?.message, Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@DetailComposition, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+
+                    override fun onFailure(call: Call<updateResponse>, t: Throwable) {
+
+                    }
+
+                })
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ import com.hfad.capstone.data.Composition
 import com.hfad.capstone.databinding.FragmentBahanTabBinding
 import com.hfad.capstone.helper.CompositionAdapter
 import com.hfad.capstone.helper.SessionManager
-import com.hfad.capstone.ui.DetailComposition
+import com.hfad.capstone.ui.detail.DetailComposition
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
