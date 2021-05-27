@@ -9,6 +9,7 @@ class SessionManager (context: Context) {
 
     companion object {
         const val USER_TOKEN = "user_token"
+        const val PRODUCT_ID = "product_id"
     }
 
     fun saveAuthToken(token: String) {
@@ -19,5 +20,14 @@ class SessionManager (context: Context) {
 
     fun fetchAuthToken(): String? {
         return prefs.getString(USER_TOKEN, null)
+    }
+    fun saveProductId(id: String) {
+        val editor = prefs.edit()
+        editor.putString(PRODUCT_ID, id)
+        editor.apply()
+    }
+
+    fun fetchProductId(): String? {
+        return prefs.getString(PRODUCT_ID, null)
     }
 }

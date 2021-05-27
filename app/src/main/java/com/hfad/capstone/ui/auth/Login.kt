@@ -6,6 +6,8 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.hfad.capstone.MainActivity
@@ -108,7 +110,11 @@ class Login : AppCompatActivity() {
     }
 
     private fun checkToken(){
-        binding.progressBar.visibility = View.VISIBLE
+        if (sessionManager.fetchAuthToken() != null)
+        {
+            binding.progressBar.visibility = View.VISIBLE
+        }
+
         sessionManager.fetchAuthToken()?.let {
             ClientRetrofit.instanceRetrofit.checkToken(it).enqueue(object : Callback<ResponseAuth> {
                 override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {

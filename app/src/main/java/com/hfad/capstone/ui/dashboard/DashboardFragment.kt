@@ -33,6 +33,7 @@ class DashboardFragment : Fragment() {
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 binding.dashboardGreetings.text = binding.dashboardGreetings.text.toString()+ (response.body()?.username)
+
             }
             override fun onFailure(call: Call<User>, t: Throwable) {
 

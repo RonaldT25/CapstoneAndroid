@@ -74,5 +74,7 @@
     <string name="ubah_sandi">Ubah Sandi</string>
     <string name="sandi_baru">Kata Sandi Baru</string>
     <string name="input_sandi">Masukkan Sandi Baru</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

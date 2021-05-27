@@ -33,6 +33,23 @@ class ProdukFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setViewPager()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setFab(){
+        binding.fab.setOnClickListener{
+            val intent = Intent(activity, AddActivity::class.java)
+            intent.putExtra(AddActivity.EXTRA_ID, currentTab)
+            startActivity(intent)
+        }
+    }
+
+    private fun setViewPager(){
         pagerAdapters = SectionPagerAdapter(childFragmentManager)
         pagerAdapters.addFragment(ProdukTab(), "Produk")
         pagerAdapters.addFragment(BahanTab(), "Bahan")
@@ -58,19 +75,6 @@ class ProdukFragment : Fragment() {
         pTabs.getTabAt((0))!!.setText("Produk")
         pTabs.getTabAt((1))!!.setText("Bahan")
         setFab()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun setFab(){
-        binding.fab.setOnClickListener{
-            val intent = Intent(activity, AddActivity::class.java)
-            intent.putExtra(AddActivity.EXTRA_ID, currentTab)
-            startActivity(intent)
-        }
     }
 
 

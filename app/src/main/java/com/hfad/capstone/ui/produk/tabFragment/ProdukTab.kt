@@ -41,7 +41,7 @@ class ProdukTab : Fragment() {
             ClientRetrofit.instanceRetrofit.readProduct(it).enqueue(object : Callback<List<Product>> {
                 override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                     val  listProduct = response.body()!!
-                    listProduct?.let {
+                    listProduct.let {
                         produkAdapter.onItemClick = { selectedData ->
                             val intent = Intent(activity, DetailActivity::class.java)
                             intent.putExtra(DetailActivity.EXTRA_PRODUCT, selectedData)

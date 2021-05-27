@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Capstone.noActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.analyzereview.AnalyzeReviewActivity"></activity>
         <activity android:name=".ui.ChangePasswordActivity">
             android:theme="@style/Theme.Capstone">
-
         </activity>
         <activity android:name=".ui.add.AddActivity">
             android:theme="@style/Theme.Capstone">

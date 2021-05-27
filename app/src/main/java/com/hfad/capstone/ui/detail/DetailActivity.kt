@@ -4,26 +4,26 @@ package com.hfad.capstone.ui.detail
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import com.hfad.capstone.MainActivity
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.Product
-import com.hfad.capstone.data.ReviewResponse
 import com.hfad.capstone.data.updateResponse
 import com.hfad.capstone.databinding.ActivityDetailBinding
 import com.hfad.capstone.helper.SessionManager
+import com.hfad.capstone.ui.analyzereview.AnalyzeReviewActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class DetailActivity : AppCompatActivity() {
-    companion object{
+    companion object {
         const val EXTRA_PRODUCT = "extra-product"
     }
+
     private lateinit var binding: ActivityDetailBinding
     private var extras: Product? = null
     private lateinit var sessionManager: SessionManager
@@ -36,41 +36,41 @@ class DetailActivity : AppCompatActivity() {
         setDetail()
     }
 
-    private fun setDetail(){
+    private fun setDetail() {
         extras = intent.getParcelableExtra(EXTRA_PRODUCT)
-        if (extras!=null){
+        sessionManager.saveProductId(extras?.id.toString())
+        if (extras != null) {
             binding.detailTitle.text = extras!!.productName
             binding.editTextHarga.setHint(extras!!.price.toString())
             binding.editTextTautan.setHint(extras!!.tokopediaProductUrl.toString())
         }
-        binding.btnSave.setOnClickListener{
+        binding.btnSave.setOnClickListener {
             update()
         }
         binding.deleteProduct.setOnClickListener {
             delete()
         }
-        binding.buttonAnalisaUlasan.setOnClickListener{
+        binding.buttonAnalisaUlasan.setOnClickListener {
             analyze()
         }
     }
 
 
-    private fun update(){
+    private fun update() {
         if (binding.editTextHarga.text.isEmpty()) {
             binding.editTextHarga.error = getText(R.string.usernamewarning)
             binding.editTextHarga.requestFocus()
-        }
-        else{
+        } else {
             sessionManager.fetchAuthToken()?.let {
                 extras?.let { it1 ->
                     ClientRetrofit.instanceRetrofit.updateProduct(
-                        it1.id,
-                        it1.productName,
-                        binding.editTextHarga.text.toString().toInt(),
-                        it
+                            it1.id,
+                            it1.productName,
+                            binding.editTextHarga.text.toString().toInt(),
+                            it
                     ).enqueue(object : Callback<updateResponse> {
                         override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
-                            Toast.makeText(this@DetailActivity, response.body()?.message,LENGTH_SHORT).show()
+                            Toast.makeText(this@DetailActivity, response.body()?.message, LENGTH_SHORT).show()
                             val intent = Intent(this@DetailActivity, MainActivity::class.java)
                             startActivity(intent)
                         }
@@ -84,15 +84,16 @@ class DetailActivity : AppCompatActivity() {
             }
         }
     }
-    private fun delete(){
+
+    private fun delete() {
         sessionManager.fetchAuthToken()?.let {
             extras?.let { it1 ->
                 ClientRetrofit.instanceRetrofit.deleteProduct(
-                    it1.id,
-                    it
+                        it1.id,
+                        it
                 ).enqueue(object : Callback<updateResponse> {
                     override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
-                        Toast.makeText(this@DetailActivity, response.body()?.message,LENGTH_SHORT).show()
+                        Toast.makeText(this@DetailActivity, response.body()?.message, LENGTH_SHORT).show()
                         val intent = Intent(this@DetailActivity, MainActivity::class.java)
                         startActivity(intent)
                     }
@@ -107,25 +108,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun analyze() {
-        binding.progressBar.visibility = View.VISIBLE
-        sessionManager.fetchAuthToken()?.let {
-            extras?.let { it1 ->
-                ClientRetrofit.instanceRetrofit.readCrawlKomentar(
-                        it1.id,
-                        it
-                ).enqueue(object : Callback<ReviewResponse> {
-                    override fun onResponse(call: Call<ReviewResponse>, response: Response<ReviewResponse>) {
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(this@DetailActivity, response.body()?.neutral?.get(0).toString(), LENGTH_SHORT).show()
-                    }
-
-                    override fun onFailure(call: Call<ReviewResponse>, t: Throwable) {
-
-                    }
-
-
-                })
-            }
-        }
+        val intent = Intent(this@DetailActivity, AnalyzeReviewActivity::class.java)
+        startActivity(intent)
     }
 }
