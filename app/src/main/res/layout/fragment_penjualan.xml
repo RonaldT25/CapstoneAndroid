@@ -15,6 +15,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
         android:id="@+id/searchView"
@@ -29,6 +43,9 @@
         android:backgroundTint="@color/white"
         android:elevation="3dp"
         android:foregroundGravity="fill"
+        android:iconifiedByDefault="false"
+        app:queryHint="@string/search"
+        app:defaultQueryHint="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,16 +53,51 @@
         app:showAsAction="collapseActionView|always" />
 
     <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
+        android:id="@+id/penjualan_greetings"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:tabTextColor="#031370"
+        android:text="@string/title_penjualan"
+        android:paddingTop="20dp"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:layout_marginTop="35dp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_transaction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="300dp"
+            tools:listitem="@layout/item_list_transaction" />
+
+    <TextView
+        android:id="@+id/penjualan_text"
+        android:layout_width="357dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:minLines="2"
+        android:paddingTop="20dp"
+        android:text="@string/penjualan_text"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="63dp"
+        android:layout_height="55dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="600dp"
+        android:src="@drawable/ic_baseline_add_24"
+        app:backgroundTint="#03A9F4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="#3299EC" />
 </androidx.constraintlayout.widget.ConstraintLayout>

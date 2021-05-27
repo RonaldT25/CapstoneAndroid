@@ -9,4 +9,5 @@ object Constants {
     const val READCOMPOSITION_URL = "api/users/stores/compositions/"
     const val READSTORE_URL = "api/users/stores/"
     const val SESSION_URL = "api/users/session"
+    const val TRANSACTION_URL ="api/users/stores/transactions/"
 }

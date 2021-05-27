@@ -34,6 +34,10 @@ class PenggunaTab : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPenggunaTabBinding.inflate(inflater, container, false)
         clientRetrofit = ClientRetrofit()
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         getProfile()
         binding.btnLogin.setOnClickListener {
             updateProfile()
@@ -42,10 +46,7 @@ class PenggunaTab : Fragment() {
             val intent = Intent(context, ChangePasswordActivity::class.java)
             startActivity(intent)
         }
-        return binding.root
-
     }
-
     private fun getProfile() {
 
         GlobalScope.launch(Dispatchers.Main) {

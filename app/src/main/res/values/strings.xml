@@ -74,7 +74,15 @@
     <string name="ubah_sandi">Ubah Sandi</string>
     <string name="sandi_baru">Kata Sandi Baru</string>
     <string name="input_sandi">Masukkan Sandi Baru</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="analisa_ulasan">Analisa Ulasan</string>
+    <string name="analisa_penjualan">Analisa Penjualan</string>
+    <string name="delete_product">Delete Product</string>
+    <string name="penjualan_text">Yuk catat terus transaksimu untuk menggunakan layanan analisa penjualan.</string>
+    <string name="search">Tulis Kata Kunci pencarian...</string>
+    <string name="profile_text">Kelola informasi toko dan pengguna</string>
+    <string name="produk_text">Kelola produk dan bahan baku</string>
+    <string name="dashobard_text">Page Description</string>
+    <string name="detail_penjualan">Detail Penjualan</string>
+    <string name="terjual">Terjual</string>
 </resources>

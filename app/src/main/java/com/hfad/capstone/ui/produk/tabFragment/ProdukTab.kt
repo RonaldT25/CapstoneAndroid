@@ -23,8 +23,6 @@ import retrofit2.Response
 class ProdukTab : Fragment() {
     private var _binding: FragmentProdukTabBinding? = null
     private val binding get() = _binding!!
-
-
     private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentProdukTabBinding.inflate(inflater, container, false)

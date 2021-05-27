@@ -102,7 +102,7 @@ interface Api {
     @GET("api/users/stores/products/{productId}/reviews")
     suspend fun readCrawlKomentar(@Path("productId") productId:Int ) : Response<ReviewResponse>
 
-
-
+    @GET(Constants.TRANSACTION_URL)
+    suspend fun readTransaction() : Response<List<Transaction>>
 
 }

@@ -15,6 +15,33 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/produk_geetings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_produk"
+        android:paddingTop="20dp"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:layout_marginTop="35dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/produk_text"
+        android:layout_width="357dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:text="@string/produk_text"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/myPagerView"
@@ -52,11 +79,11 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="63dp"
+        android:layout_height="55dp"
         android:layout_gravity="end|bottom"
-        android:layout_marginStart="350dp"
-        android:layout_marginTop="590dp"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="600dp"
         android:src="@drawable/ic_baseline_add_24"
         app:backgroundTint="#03A9F4"
         app:layout_constraintStart_toStartOf="parent"

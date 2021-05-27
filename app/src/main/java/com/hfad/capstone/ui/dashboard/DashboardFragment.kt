@@ -23,10 +23,14 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        getProfile()
         clientRetrofit = ClientRetrofit()
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getProfile()
     }
 
     @SuppressLint("SetTextI18n")

@@ -26,7 +26,6 @@ class DetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_PRODUCT = "extra-product"
     }
-
     private lateinit var binding: ActivityDetailBinding
     private var extras: Product? = null
     private lateinit var sessionManager: SessionManager

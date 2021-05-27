@@ -10,7 +10,7 @@
         android:id="@+id/topBarView"
         android:layout_width="0dp"
         android:layout_height="125dp"
-        android:background="@color/black"
+        android:background="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -115,6 +115,7 @@
         android:background="@drawable/round_bg"
         android:contentDescription="@string/logo"
         android:shadowColor="@color/black"
+        app:backgroundTint="@color/blue"
         android:text="@string/register"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"

@@ -9,11 +9,13 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/detail_card_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="398dp"
+        android:layout_height="433dp"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="2dp"
         android:elevation="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
@@ -21,7 +23,9 @@
         app:contentPaddingBottom="16dp"
         app:contentPaddingLeft="16dp"
         app:contentPaddingRight="16dp"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -49,11 +53,12 @@
                 android:minHeight="32dp"
                 android:text="@string/example"
                 android:textAllCaps="true"
-                android:textColor="@color/lightblue"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/detailproduk"
-                app:layout_constraintTop_toBottomOf="@+id/detailproduk"/>
+                app:layout_constraintTop_toBottomOf="@+id/detailproduk" />
+
             <ProgressBar
                 android:id="@+id/progress_bar"
                 style="?android:attr/progressBarStyle"
@@ -68,13 +73,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <ImageButton
                 android:id="@+id/deleteProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:background="@null"
                 android:src="@drawable/ic_baseline_delete_24"
                 app:layout_constraintEnd_toEndOf="@+id/detailproduk"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/delete_product" />
 
             <TextView
                 android:id="@+id/detail_harga"
@@ -84,10 +94,10 @@
                 android:gravity="center_vertical"
                 android:minHeight="32dp"
                 android:text="@string/detail_harga"
-                android:textColor="@color/lightblue"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="@+id/detail_title"
-                app:layout_constraintTop_toBottomOf="@+id/detail_title"                />
+                app:layout_constraintTop_toBottomOf="@+id/detail_title" />
 
             <EditText
                 android:id="@+id/editTextHarga"
@@ -102,15 +112,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/detail_harga"
                 tools:ignore="RtlSymmetry">
             </EditText>
+
             <TextView
                 android:id="@+id/detail_tautan_text"
                 android:layout_width="wrap_content"
-                android:textColor="@color/lightblue"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/detail_tautan"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/editTextHarga"
                 app:layout_constraintTop_toBottomOf="@+id/editTextHarga" />
+
             <EditText
                 android:id="@+id/editTextTautan"
                 android:layout_width="350dp"
@@ -131,21 +143,23 @@
                 android:layout_margin="40dp"
                 android:background="@drawable/round_bg"
                 android:contentDescription="@string/logo"
-                android:shadowColor="@color/black"
+                android:shadowColor="@color/blue"
+                app:backgroundTint="@color/blue"
                 android:text="@string/save"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTautan" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextTautan"
+                 />
 
             <Button
                 android:id="@+id/buttonDetailBahanBaku"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:background="@color/transparent"
                 android:text="@string/detailBahanBaku"
                 android:textColor="@color/black"
                 android:textSize="14sp"
@@ -153,40 +167,138 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnSave" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/detail_penunjang_cv"
+        android:layout_width="402dp"
+        android:layout_height="181dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="2dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:contentPaddingBottom="16dp"
+        app:contentPaddingLeft="16dp"
+        app:contentPaddingRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_card_view">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="384dp"
+            android:layout_height="183dp">
+
             <TextView
                 android:id="@+id/detail_penunjang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:elevation="10dp"
+                android:textColor="@color/black"
                 android:text="@string/detailPenunjang"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/detail_tautan_text"
-                app:layout_constraintTop_toBottomOf="@+id/buttonDetailBahanBaku" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/buttonAnalisaUlasan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@color/transparent"
-                android:src="@drawable/ic_chat_bubble"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/detail_penunjang"
-                app:layout_constraintTop_toBottomOf="@+id/detail_penunjang" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_analisa"
+                android:layout_width="174dp"
+                android:layout_height="121dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:elevation="10dp"
+                app:cardElevation="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/buttonAnalisaPenjualan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:src="@drawable/ic_business"
-                android:background="@color/transparent"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/buttonAnalisaUlasan"
-                app:layout_constraintStart_toEndOf="@+id/buttonAnalisaUlasan"
-                app:layout_constraintTop_toTopOf="@+id/buttonAnalisaUlasan" />
+                <ImageView
+                    android:id="@+id/buttonAnalisaUlasan"
+                    android:layout_width="58dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/transparent"
+                    android:contentDescription="@string/analisa_ulasan"
+                    android:src="@drawable/ic_chat_bubble"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
+
+                <TextView
+                    android:id="@+id/analisa_ulasan"
+                    android:layout_width="84dp"
+                    android:layout_height="53dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:minLines="2"
+                    android:text="@string/analisa_ulasan"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="174dp"
+                android:layout_height="121dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="32dp"
+                android:elevation="10dp"
+                app:cardElevation="4dp"
+                app:layout_constraintStart_toEndOf="@+id/cv_analisa"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <ImageView
+                    android:id="@+id/buttonAnalisaPenjualan"
+                    android:layout_width="58dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/transparent"
+                    android:contentDescription="@string/analisa_ulasan"
+                    android:src="@drawable/ic_business"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="parent" />
+
+                <TextView
+                    android:id="@+id/analisa_penjualan"
+                    android:layout_width="84dp"
+                    android:layout_height="53dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:minLines="2"
+                    android:text="@string/analisa_penjualan"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
+            </androidx.cardview.widget.CardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

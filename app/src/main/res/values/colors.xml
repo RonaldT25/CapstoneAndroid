@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
@@ -7,5 +7,6 @@
     <color name="transparent">#00000000</color>
     <color name="blue">#3092DF</color>
     <color name="darkblue">#0B1C50</color>
-    <color name="lightblue">#1D3EA3</color>
+    <color name="lightblue">#2192c2</color>
+
 </resources>

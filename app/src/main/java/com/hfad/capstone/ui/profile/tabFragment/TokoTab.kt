@@ -28,11 +28,15 @@ class TokoTab : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentTokoTabBinding.inflate(inflater, container, false)
         clientRetrofit = ClientRetrofit()
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         getStore()
         binding.btnLogin.setOnClickListener {
             updateStore()
         }
-        return binding.root
     }
 
     private fun getStore() {
