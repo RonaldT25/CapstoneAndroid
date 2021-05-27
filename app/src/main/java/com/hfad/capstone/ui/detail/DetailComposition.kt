@@ -11,6 +11,9 @@ import com.hfad.capstone.data.Composition
 import com.hfad.capstone.data.updateResponse
 import com.hfad.capstone.databinding.ActivityDetailCompostionBinding
 import com.hfad.capstone.helper.SessionManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,12 +24,12 @@ class DetailComposition : AppCompatActivity() {
     }
     private lateinit var binding: ActivityDetailCompostionBinding
     private var extras: Composition? = null
-    private lateinit var sessionManager: SessionManager
+    private lateinit var clientRetrofit: ClientRetrofit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailCompostionBinding.inflate(layoutInflater)
-        sessionManager = SessionManager(this)
+        clientRetrofit = ClientRetrofit()
         supportActionBar?.title = getString(R.string.detailComposition)
         setContentView(binding.root)
         setDetail()
@@ -52,48 +55,33 @@ class DetailComposition : AppCompatActivity() {
             binding.editTextUnit.requestFocus()
         }
         else{
-            sessionManager.fetchAuthToken()?.let {
+            GlobalScope.launch(Dispatchers.Main) {
                 extras?.let { it1 ->
-                    ClientRetrofit.instanceRetrofit.updateComposition(
+                    val response = clientRetrofit.getApiService(this@DetailComposition).updateComposition(
                         it1.id,
                         it1.compositionName,
-                        binding.editTextUnit.text.toString(),
-                        it
-                    ).enqueue(object : Callback<updateResponse> {
-                        override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
-                            Toast.makeText(this@DetailComposition, response.body()?.message, Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@DetailComposition, MainActivity::class.java)
-                            startActivity(intent)
-                        }
-
-                        override fun onFailure(call: Call<updateResponse>, t: Throwable) {
-
-                        }
-
-                    })
+                        binding.editTextUnit.text.toString()
+                    )
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@DetailComposition, response.body()?.message, Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@DetailComposition, MainActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
             }
         }
     }
 
     private fun delete(){
-        sessionManager.fetchAuthToken()?.let {
+
+        GlobalScope.launch(Dispatchers.Main) {
             extras?.let { it1 ->
-                ClientRetrofit.instanceRetrofit.deleteComposition(
-                    it1.id,
-                    it
-                ).enqueue(object : Callback<updateResponse> {
-                    override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
-                        Toast.makeText(this@DetailComposition, response.body()?.message, Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@DetailComposition, MainActivity::class.java)
-                        startActivity(intent)
-                    }
-
-                    override fun onFailure(call: Call<updateResponse>, t: Throwable) {
-
-                    }
-
-                })
+                val response = clientRetrofit.getApiService(this@DetailComposition).deleteComposition(it1.id)
+                if (response.isSuccessful) {
+                    Toast.makeText(this@DetailComposition, response.body()?.message, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@DetailComposition, MainActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
     }

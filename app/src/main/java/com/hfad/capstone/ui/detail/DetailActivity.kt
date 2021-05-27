@@ -14,6 +14,9 @@ import com.hfad.capstone.data.updateResponse
 import com.hfad.capstone.databinding.ActivityDetailBinding
 import com.hfad.capstone.helper.SessionManager
 import com.hfad.capstone.ui.analyzereview.AnalyzeReviewActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,9 +30,11 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private var extras: Product? = null
     private lateinit var sessionManager: SessionManager
+    private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
+        clientRetrofit = ClientRetrofit()
         sessionManager = SessionManager(this)
         supportActionBar?.title = getString(R.string.detail)
         setContentView(binding.root)
@@ -61,48 +66,32 @@ class DetailActivity : AppCompatActivity() {
             binding.editTextHarga.error = getText(R.string.usernamewarning)
             binding.editTextHarga.requestFocus()
         } else {
-            sessionManager.fetchAuthToken()?.let {
+            GlobalScope.launch(Dispatchers.Main) {
                 extras?.let { it1 ->
-                    ClientRetrofit.instanceRetrofit.updateProduct(
-                            it1.id,
-                            it1.productName,
-                            binding.editTextHarga.text.toString().toInt(),
-                            it
-                    ).enqueue(object : Callback<updateResponse> {
-                        override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
+                    val response = clientRetrofit.getApiService(this@DetailActivity).updateProduct(
+                        it1.id,
+                        it1.productName,
+                        binding.editTextHarga.text.toString().toInt()
+                    )
+                        if (response.isSuccessful) {
                             Toast.makeText(this@DetailActivity, response.body()?.message, LENGTH_SHORT).show()
                             val intent = Intent(this@DetailActivity, MainActivity::class.java)
                             startActivity(intent)
-                        }
-
-                        override fun onFailure(call: Call<updateResponse>, t: Throwable) {
-
-                        }
-
-                    })
+                    }
                 }
             }
         }
     }
 
     private fun delete() {
-        sessionManager.fetchAuthToken()?.let {
+        GlobalScope.launch(Dispatchers.Main) {
             extras?.let { it1 ->
-                ClientRetrofit.instanceRetrofit.deleteProduct(
-                        it1.id,
-                        it
-                ).enqueue(object : Callback<updateResponse> {
-                    override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
-                        Toast.makeText(this@DetailActivity, response.body()?.message, LENGTH_SHORT).show()
-                        val intent = Intent(this@DetailActivity, MainActivity::class.java)
-                        startActivity(intent)
-                    }
-
-                    override fun onFailure(call: Call<updateResponse>, t: Throwable) {
-
-                    }
-
-                })
+                val response = clientRetrofit.getApiService(this@DetailActivity).deleteProduct(it1.id)
+                if (response.isSuccessful) {
+                    Toast.makeText(this@DetailActivity, response.body()?.message, LENGTH_SHORT).show()
+                    val intent = Intent(this@DetailActivity, MainActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
     }

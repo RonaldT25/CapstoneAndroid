@@ -15,6 +15,9 @@ import com.hfad.capstone.data.Product
 import com.hfad.capstone.databinding.FragmentAddBahanBinding
 import com.hfad.capstone.databinding.FragmentAddProdukBinding
 import com.hfad.capstone.helper.SessionManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,32 +26,26 @@ import retrofit2.Response
 class AddBahan : Fragment() {
     private var _binding: FragmentAddBahanBinding? = null
     private val binding get() = _binding!!
-    private lateinit var sessionManager: SessionManager
+    private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentAddBahanBinding.inflate(inflater, container, false)
-        sessionManager = SessionManager(this.requireContext())
+        clientRetrofit = ClientRetrofit()
         binding.btnAddProduk.setOnClickListener {
             createComposition()
         }
         return binding.root
     }
     private fun createComposition(){
-        sessionManager.fetchAuthToken()?.let {
-            ClientRetrofit.instanceRetrofit.createComposition(it,
-                binding.inputBahan.text.toString(),
-                binding.satuanBahan.text.toString()).enqueue(object : Callback<Composition> {
-                override fun onResponse(call: Call<Composition>, response: Response<Composition>) {
+
+        GlobalScope.launch(Dispatchers.Main){
+            val response = context?.let { clientRetrofit.getApiService(it).createComposition(binding.inputBahan.text.toString(), binding.satuanBahan.text.toString()) }
+            if (response != null) {
+                if(response.isSuccessful){
                     Toast.makeText(context, response.body()?.compositionName, Toast.LENGTH_SHORT).show()
                     val intent = Intent(context, MainActivity::class.java)
                     startActivity(intent)
                 }
-
-                override fun onFailure(call: Call<Composition>, t: Throwable) {
-
-                }
-
-
-            })
+            }
         }
     }
     override fun onDestroyView() {

@@ -10,6 +10,9 @@ import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.User
 import com.hfad.capstone.databinding.FragmentDashboardBinding
 import com.hfad.capstone.helper.SessionManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,28 +21,24 @@ import retrofit2.Response
 class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
-    private lateinit var sessionManager: SessionManager
+    private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        sessionManager = SessionManager(this.requireContext())
         getProfile()
+        clientRetrofit = ClientRetrofit()
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getProfile(){
 
-        sessionManager.fetchAuthToken()?.let {
-            ClientRetrofit.instanceRetrofit.getProfile(it).enqueue(object : Callback<User> {
-            @SuppressLint("SetTextI18n")
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                binding.dashboardGreetings.text = binding.dashboardGreetings.text.toString()+ (response.body()?.username)
-
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = context?.let { clientRetrofit.getApiService(it).getProfile() }
+            if (response != null) {
+                if (response.isSuccessful){
+                    binding.dashboardGreetings.text = binding.dashboardGreetings.text.toString()+ (response.body()?.username)
+                }
             }
-            override fun onFailure(call: Call<User>, t: Throwable) {
-
-            }
-
-        })
         }
     }
     override fun onDestroyView() {

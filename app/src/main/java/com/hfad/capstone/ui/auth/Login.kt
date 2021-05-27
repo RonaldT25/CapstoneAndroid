@@ -25,11 +25,12 @@ class Login : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var sessionManager: SessionManager
-
+    private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        clientRetrofit = ClientRetrofit()
         sessionManager = SessionManager(this)
         checkToken()
         binding.forgotPassword.setOnClickListener{
@@ -54,9 +55,9 @@ class Login : AppCompatActivity() {
         }
 
         else{
-            ClientRetrofit.instanceRetrofit.login(
-                    binding.editTextLogin.text.toString(),
-                    binding.editTextPassword.text.toString()
+            clientRetrofit.getApiService(this).login(
+                binding.editTextLogin.text.toString(),
+                binding.editTextPassword.text.toString()
             ).enqueue(object : Callback<ResponseAuth> {
                 override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
                     if (response.isSuccessful){
@@ -116,7 +117,7 @@ class Login : AppCompatActivity() {
         }
 
         sessionManager.fetchAuthToken()?.let {
-            ClientRetrofit.instanceRetrofit.checkToken(it).enqueue(object : Callback<ResponseAuth> {
+            clientRetrofit.getApiService(this).checkToken(it).enqueue(object : Callback<ResponseAuth> {
                 override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
                     binding.progressBar.visibility = View.GONE
                     if (response.body()?.auth == true){

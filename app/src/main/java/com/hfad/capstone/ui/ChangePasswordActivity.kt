@@ -13,18 +13,21 @@ import com.hfad.capstone.data.updateResponse
 import com.hfad.capstone.databinding.ActivityChangePasswordBinding
 import com.hfad.capstone.databinding.ActivityDetailBinding
 import com.hfad.capstone.helper.SessionManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ChangePasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChangePasswordBinding
-    private lateinit var sessionManager: SessionManager
+    private lateinit var clientRetrofit: ClientRetrofit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChangePasswordBinding.inflate(layoutInflater)
-        sessionManager = SessionManager(this)
+        clientRetrofit = ClientRetrofit()
         binding.btnChangePassword.setOnClickListener {
             changePassword()
         }
@@ -32,21 +35,13 @@ class ChangePasswordActivity : AppCompatActivity() {
     }
 
     private fun changePassword() {
-        sessionManager.fetchAuthToken()?.let {
-            ClientRetrofit.instanceRetrofit.updateProfilePassword(it,
-            binding.inputSandi.text.toString()).enqueue(object : Callback<updateResponse> {
-                override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
-                    Toast.makeText(this@ChangePasswordActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@ChangePasswordActivity, MainActivity::class.java)
-                    startActivity(intent)
-                }
-
-                override fun onFailure(call: Call<updateResponse>, t: Throwable) {
-
-                }
-
-
-            })
+        GlobalScope.launch(Dispatchers.Main){
+            val response = clientRetrofit.getApiService(this@ChangePasswordActivity).updateProfilePassword(binding.inputSandi.text.toString())
+            if(response.isSuccessful){
+                Toast.makeText(this@ChangePasswordActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@ChangePasswordActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

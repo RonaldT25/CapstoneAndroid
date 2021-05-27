@@ -13,6 +13,9 @@ import com.hfad.capstone.databinding.FragmentProdukTabBinding
 import com.hfad.capstone.helper.ProdukAdapter
 import com.hfad.capstone.helper.SessionManager
 import com.hfad.capstone.ui.detail.DetailActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,7 +25,7 @@ class ProdukTab : Fragment() {
     private val binding get() = _binding!!
 
 
-    private lateinit var sessionManager: SessionManager
+    private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentProdukTabBinding.inflate(inflater, container, false)
         return binding.root
@@ -30,16 +33,16 @@ class ProdukTab : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sessionManager = SessionManager(this.requireContext())
+        clientRetrofit = ClientRetrofit()
         getProducts()
     }
     private fun getProducts(){
 
         val produkAdapter = ProdukAdapter()
-
-        sessionManager.fetchAuthToken()?.let {
-            ClientRetrofit.instanceRetrofit.readProduct(it).enqueue(object : Callback<List<Product>> {
-                override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = context?.let { clientRetrofit.getApiService(it).readProduct() }
+            if (response != null) {
+                if (response.isSuccessful){
                     val  listProduct = response.body()!!
                     listProduct.let {
                         produkAdapter.onItemClick = { selectedData ->
@@ -57,13 +60,7 @@ class ProdukTab : Fragment() {
                         }
                     }
                 }
-
-                override fun onFailure(call: Call<List<Product>>, t: Throwable) {
-
-                }
-
-
-            })
+            }
         }
     }
 

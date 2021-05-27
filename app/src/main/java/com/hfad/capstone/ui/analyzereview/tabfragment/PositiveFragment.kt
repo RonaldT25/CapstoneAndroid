@@ -13,6 +13,9 @@ import com.hfad.capstone.databinding.FragmentNeutralBinding
 import com.hfad.capstone.databinding.FragmentPositiveBinding
 import com.hfad.capstone.helper.ReviewAdapter
 import com.hfad.capstone.helper.SessionManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,6 +24,7 @@ import retrofit2.Response
 class PositiveFragment : Fragment() {
     private var _binding: FragmentPositiveBinding? = null
     private val binding get() = _binding!!
+    private lateinit var clientRetrofit: ClientRetrofit
     private lateinit var sessionManager: SessionManager
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPositiveBinding.inflate(inflater, container, false)
@@ -29,6 +33,7 @@ class PositiveFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        clientRetrofit = ClientRetrofit()
         sessionManager = SessionManager(this.requireContext())
         getReview()
     }
@@ -36,10 +41,10 @@ class PositiveFragment : Fragment() {
         binding.progressBar.visibility = View.VISIBLE
         val reviewAdapter = ReviewAdapter()
 
-        sessionManager.fetchAuthToken()?.let {
-            ClientRetrofit.instanceRetrofit.readCrawlKomentar(sessionManager.fetchProductId()!!.toInt(),it).enqueue(object :
-                Callback<ReviewResponse> {
-                override fun onResponse(call: Call<ReviewResponse>, response: Response<ReviewResponse>) {
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = context?.let { clientRetrofit.getApiService(it).readCrawlKomentar(sessionManager.fetchProductId()!!.toInt()) }
+            if (response != null) {
+                if (response.isSuccessful){
                     binding.progressBar.visibility = View.GONE
                     val  listReview = response.body()?.positive
 
@@ -51,13 +56,7 @@ class PositiveFragment : Fragment() {
                         adapter = reviewAdapter
                     }
                 }
-
-                override fun onFailure(call: Call<ReviewResponse>, t: Throwable) {
-
-                }
-
-
-            })
+            }
         }
     }
 }

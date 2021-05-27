@@ -20,10 +20,12 @@ class Register : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     var role = ""
+    private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        clientRetrofit = ClientRetrofit()
         binding.forgotPassword.setOnClickListener {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
@@ -62,7 +64,7 @@ class Register : AppCompatActivity() {
         if (role.isEmpty()) {
             Toast.makeText(this, "Role Harus diisi", Toast.LENGTH_SHORT).show()
         } else {
-            ClientRetrofit.instanceRetrofit.register(
+            clientRetrofit.getApiService(this).register(
                 binding.editTextName.text.toString(),
                 binding.editTextEmail.text.toString(),
                 binding.editTextPassword.text.toString(),
@@ -70,11 +72,11 @@ class Register : AppCompatActivity() {
             ).enqueue(object : Callback<ResponseAuth> {
                 override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
                     if (response.isSuccessful){
-                            registerSuccess()
-                        }
+                        registerSuccess()
+                    }
                     else{
-                            registerFailed()
-                        }
+                        registerFailed()
+                    }
                 }
 
                 override fun onFailure(call: Call<ResponseAuth>, t: Throwable) {

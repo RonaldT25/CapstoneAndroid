@@ -13,6 +13,9 @@ import com.hfad.capstone.databinding.FragmentBahanTabBinding
 import com.hfad.capstone.helper.CompositionAdapter
 import com.hfad.capstone.helper.SessionManager
 import com.hfad.capstone.ui.detail.DetailComposition
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,24 +24,23 @@ import retrofit2.Response
 class BahanTab : Fragment() {
     private var _binding: FragmentBahanTabBinding? = null
     private val binding get() = _binding!!
-    private lateinit var sessionManager: SessionManager
+    private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentBahanTabBinding.inflate(inflater, container, false)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sessionManager = SessionManager(this.requireContext())
+       clientRetrofit = ClientRetrofit()
         getCompositions()
     }
 
     private fun getCompositions() {
         val compositionAdapter = CompositionAdapter()
-
-        sessionManager.fetchAuthToken()?.let {
-            ClientRetrofit.instanceRetrofit.readComposition(it).enqueue(object :
-                Callback<List<Composition>> {
-                override fun onResponse(call: Call<List<Composition>>, response: Response<List<Composition>>) {
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = context?.let { clientRetrofit.getApiService(it).readComposition() }
+            if (response != null) {
+                if (response.isSuccessful){
                     val  listComposition = response.body()!!
                     listComposition?.let {
                         compositionAdapter.onItemClick = { selectedData ->
@@ -56,13 +58,7 @@ class BahanTab : Fragment() {
                         }
                     }
                 }
-
-                override fun onFailure(call: Call<List<Composition>>, t: Throwable) {
-
-                }
-
-
-            })
+            }
         }
     }
 

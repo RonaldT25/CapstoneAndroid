@@ -19,6 +19,9 @@ import com.hfad.capstone.databinding.FragmentBahanTabBinding
 import com.hfad.capstone.databinding.FragmentPenggunaTabBinding
 import com.hfad.capstone.helper.SessionManager
 import com.hfad.capstone.ui.ChangePasswordActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,10 +30,10 @@ import retrofit2.Response
 class PenggunaTab : Fragment() {
     private var _binding: FragmentPenggunaTabBinding? = null
     private val binding get() = _binding!!
-    private lateinit var sessionManager: SessionManager
+    private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPenggunaTabBinding.inflate(inflater, container, false)
-        sessionManager = SessionManager(this.requireContext())
+        clientRetrofit = ClientRetrofit()
         getProfile()
         binding.btnLogin.setOnClickListener {
             updateProfile()
@@ -44,18 +47,15 @@ class PenggunaTab : Fragment() {
     }
 
     private fun getProfile() {
-        sessionManager.fetchAuthToken()?.let {
-            ClientRetrofit.instanceRetrofit.getProfile(it).enqueue(object : Callback<User> {
-                @SuppressLint("SetTextI18n")
-                override fun onResponse(call: Call<User>, response: Response<User>) {
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = context?.let { clientRetrofit.getApiService(it).getProfile() }
+            if (response != null) {
+                if (response.isSuccessful){
                     binding.inputNama.setHint(response.body()?.username)
                     binding.email.setHint(response.body()?.email)
                 }
-                override fun onFailure(call: Call<User>, t: Throwable) {
-
-                }
-
-            })
+            }
         }
     }
 
@@ -72,21 +72,15 @@ class PenggunaTab : Fragment() {
             binding.email.error = getText(R.string.emailnotvalidwarning)
             binding.email.requestFocus()
         }
-        sessionManager.fetchAuthToken()?.let {
-            ClientRetrofit.instanceRetrofit.updateProfile(it,
-            binding.inputNama.text.toString(),
-                binding.email.text.toString()
-                ).enqueue(object : Callback<updateResponse> {
-                override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = context?.let { clientRetrofit.getApiService(it).updateProfile(binding.inputNama.text.toString(),
+                binding.email.text.toString()) }
+            if (response != null) {
+                if (response.isSuccessful){
                     Toast.makeText(context, response.body()?.message,LENGTH_SHORT).show()
                 }
-
-                override fun onFailure(call: Call<updateResponse>, t: Throwable) {
-
-                }
-
-
-            })
+            }
         }
     }
     fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()

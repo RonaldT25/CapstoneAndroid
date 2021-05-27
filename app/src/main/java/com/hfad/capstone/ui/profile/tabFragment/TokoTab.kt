@@ -13,6 +13,9 @@ import com.hfad.capstone.data.StoreResponse
 import com.hfad.capstone.data.updateResponse
 import com.hfad.capstone.databinding.FragmentTokoTabBinding
 import com.hfad.capstone.helper.SessionManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,10 +24,10 @@ import retrofit2.Response
 class TokoTab : Fragment() {
     private var _binding: FragmentTokoTabBinding? = null
     private val binding get() = _binding!!
-    private lateinit var sessionManager: SessionManager
+    private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentTokoTabBinding.inflate(inflater, container, false)
-        sessionManager = SessionManager(this.requireContext())
+        clientRetrofit = ClientRetrofit()
         getStore()
         binding.btnLogin.setOnClickListener {
             updateStore()
@@ -33,19 +36,15 @@ class TokoTab : Fragment() {
     }
 
     private fun getStore() {
-        sessionManager.fetchAuthToken()?.let {
-            ClientRetrofit.instanceRetrofit.readStore(it).enqueue(object : Callback<StoreResponse> {
-                override fun onResponse(call: Call<StoreResponse>, response: Response<StoreResponse>) {
-                   binding.inputNama.setHint(response.body()?.store?.storeName)
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = context?.let { clientRetrofit.getApiService(it).readStore() }
+            if (response != null) {
+                if (response.isSuccessful){
+                    binding.inputNama.setHint(response.body()?.store?.storeName)
                     binding.deskripsiToko.setHint(response.body()?.store?.description)
                 }
-
-                override fun onFailure(call: Call<StoreResponse>, t: Throwable) {
-
-                }
-
-
-            })
+            }
         }
     }
 
@@ -54,21 +53,15 @@ class TokoTab : Fragment() {
             binding.inputNama.error = getText(R.string.usernamewarning)
             binding.inputNama.requestFocus()
         }
-        sessionManager.fetchAuthToken()?.let {
-            ClientRetrofit.instanceRetrofit.updateStore(it,
-                binding.inputNama.text.toString(),
-                binding.deskripsiToko.text.toString()
-            ).enqueue(object : Callback<updateResponse> {
-                override fun onResponse(call: Call<updateResponse>, response: Response<updateResponse>) {
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = context?.let { clientRetrofit.getApiService(it).updateStore( binding.inputNama.text.toString(),
+                binding.deskripsiToko.text.toString()) }
+            if (response != null) {
+                if (response.isSuccessful){
                     Toast.makeText(context, response.body()?.message,LENGTH_SHORT).show()
                 }
-
-                override fun onFailure(call: Call<updateResponse>, t: Throwable) {
-
-                }
-
-
-            })
+            }
         }
     }
 
