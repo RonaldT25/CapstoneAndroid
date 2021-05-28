@@ -11,19 +11,15 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.User
 import com.hfad.capstone.databinding.FragmentPenggunaTabBinding
-import com.hfad.capstone.helper.ApiHelper
-import com.hfad.capstone.helper.Status
 import com.hfad.capstone.ui.ChangePasswordActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 @AndroidEntryPoint
 class PenggunaTab : Fragment() {
@@ -50,7 +46,7 @@ class PenggunaTab : Fragment() {
 
     private fun setupObservers() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
-                result -> result.let { users -> result.let { getProfile(it) } }
+                result -> result.let { users -> result.let { it.data?.let { it1 -> getProfile(it1) } } }
         })
     }
 

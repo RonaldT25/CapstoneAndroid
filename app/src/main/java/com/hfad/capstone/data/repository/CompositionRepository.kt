@@ -11,19 +11,19 @@ class CompositionRepository @Inject constructor(
     private val api: Api,
     private val db: CompositionDatabase
 ) {
-    private val transactionDao = db.compositionDao()
+    private val compositionDao = db.compositionDao()
 
     fun getCompositions() = networkBoundResource(
         query = {
-            transactionDao.getAllCompositions()
+            compositionDao.getAllCompositions()
         },
         fetch = {
             api.readComposition()
         },
         saveFetchResult = { compositions ->
             db.withTransaction {
-                transactionDao.deleteAllCompositions()
-                transactionDao.insertCompositions(compositions)
+                compositionDao.deleteAllCompositions()
+                compositionDao.insertCompositions(compositions)
             }
         }
     )

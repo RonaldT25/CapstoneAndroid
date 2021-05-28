@@ -6,30 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.Composition
-import com.hfad.capstone.data.Product
 import com.hfad.capstone.databinding.FragmentBahanTabBinding
-import com.hfad.capstone.helper.*
+import com.hfad.capstone.helper.Adapter.CompositionAdapter
 import com.hfad.capstone.ui.detail.DetailComposition
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 @AndroidEntryPoint
 class BahanTab : Fragment() {
     private var _binding: FragmentBahanTabBinding? = null
     private val binding get() = _binding!!
-    private lateinit var clientRetrofit: ClientRetrofit
     private lateinit var compositionAdapter: CompositionAdapter
     private val viewModel: BahanTabViewModel by viewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,7 +28,6 @@ class BahanTab : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       clientRetrofit = ClientRetrofit()
         compositionAdapter = CompositionAdapter()
         setupObservers()
     }

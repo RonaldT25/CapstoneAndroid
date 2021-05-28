@@ -16,4 +16,6 @@ interface TransactionDao {
     suspend fun insertTransactions(transactions : List<TransactionEntity>)
     @Query("DELETE FROM `transaction`")
     suspend fun deleteAllTransactions()
+    @Query("SELECT * FROM `transaction` WHERE productName LIKE :searchQuery OR time LIKE :searchQuery ")
+     fun search(searchQuery:String) : Flow<List<TransactionEntity>>
 }

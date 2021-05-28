@@ -4,9 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.hfad.capstone.api.Api
 import com.hfad.capstone.api.AuthInterceptor
-import com.hfad.capstone.data.database.db.CompositionDatabase
-import com.hfad.capstone.data.database.db.ProductDatabase
-import com.hfad.capstone.data.database.db.TransactionDatabase
+import com.hfad.capstone.data.database.db.*
 import com.hfad.capstone.helper.Constants
 import dagger.Module
 import dagger.Provides
@@ -66,5 +64,15 @@ object AppModule {
         Room.databaseBuilder(app, CompositionDatabase::class.java, "composition_database")
             .build()
 
+    @Provides
+    @Singleton
+    fun provideUserDatabase(app: Application) : UserDatabase =
+            Room.databaseBuilder(app, UserDatabase::class.java, "user_database")
+                    .build()
 
+    @Provides
+    @Singleton
+    fun provideStoreDatabase(app: Application) : StoreDatabase =
+            Room.databaseBuilder(app, StoreDatabase::class.java, "store_database")
+                    .build()
 }

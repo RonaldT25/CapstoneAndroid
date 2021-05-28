@@ -1,7 +1,11 @@
 package com.hfad.capstone.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "store")
 data class Store(
-        val id:Int,
+        @PrimaryKey val id:Int,
         val storeName:String,
         val userId:Int,
         val description:String

@@ -6,19 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
-import com.hfad.capstone.data.ReviewResponse
-import com.hfad.capstone.databinding.FragmentNegativeBinding
 import com.hfad.capstone.databinding.FragmentNeutralBinding
-import com.hfad.capstone.helper.ReviewAdapter
+import com.hfad.capstone.helper.Adapter.ReviewAdapter
 import com.hfad.capstone.helper.SessionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class NeutralFragment : Fragment() {
     private var _binding: FragmentNeutralBinding? = null

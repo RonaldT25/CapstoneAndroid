@@ -18,9 +18,7 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val viewModel: DashboardViewModel by viewModels()
     private val binding get() = _binding!!
-    private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        clientRetrofit = ClientRetrofit()
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,7 +30,7 @@ class DashboardFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            result -> result.let { users -> getProfile(users) }
+            result -> result.let { users -> users.data?.let { getProfile(it) } }
         })
     }
 

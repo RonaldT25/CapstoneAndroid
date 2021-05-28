@@ -1,4 +1,4 @@
-package com.hfad.capstone.helper
+package com.hfad.capstone.helper.Adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

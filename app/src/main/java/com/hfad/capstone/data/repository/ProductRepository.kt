@@ -10,19 +10,19 @@ class ProductRepository @Inject constructor(
     private val api: Api,
     private val db: ProductDatabase
 ) {
-    private val transactionDao = db.productDao()
+    private val productDao = db.productDao()
 
     fun getProducts() = networkBoundResource(
         query = {
-            transactionDao.getAllProducts()
+            productDao.getAllProducts()
         },
         fetch = {
             api.readProduct()
         },
         saveFetchResult = { products ->
             db.withTransaction {
-                transactionDao.deleteAllProducts()
-                transactionDao.insertProducts(products)
+                productDao.deleteAllProducts()
+                productDao.insertProducts(products)
             }
         }
     )

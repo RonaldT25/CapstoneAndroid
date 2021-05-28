@@ -1,4 +1,4 @@
-package com.hfad.capstone.helper
+package com.hfad.capstone.helper.Adapter
 
 import android.view.LayoutInflater
 import android.view.View

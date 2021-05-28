@@ -1,28 +1,18 @@
 package com.hfad.capstone.ui.analyzereview.tabfragment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
-import com.hfad.capstone.data.Product
-import com.hfad.capstone.data.ReviewResponse
 import com.hfad.capstone.databinding.FragmentNegativeBinding
-import com.hfad.capstone.databinding.FragmentProdukTabBinding
-import com.hfad.capstone.helper.ProdukAdapter
-import com.hfad.capstone.helper.ReviewAdapter
+import com.hfad.capstone.helper.Adapter.ReviewAdapter
 import com.hfad.capstone.helper.SessionManager
-import com.hfad.capstone.ui.detail.DetailActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class NegativeFragment : Fragment() {

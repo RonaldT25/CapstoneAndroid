@@ -1,13 +1,11 @@
-package com.hfad.capstone.helper
+package com.hfad.capstone.helper.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hfad.capstone.R
 import com.hfad.capstone.data.Transaction
-import com.hfad.capstone.databinding.ItemListProdukBinding
 import com.hfad.capstone.databinding.ItemListTransactionBinding
 import java.util.ArrayList
 

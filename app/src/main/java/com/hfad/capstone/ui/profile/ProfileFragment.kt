@@ -8,13 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.hfad.capstone.R
-import com.hfad.capstone.databinding.FragmentDashboardBinding
-import com.hfad.capstone.databinding.FragmentPenjualanBinding
 import com.hfad.capstone.databinding.FragmentProfileBinding
-import com.hfad.capstone.helper.SectionPagerAdapter
-import com.hfad.capstone.ui.produk.tabFragment.BahanTab
-import com.hfad.capstone.ui.produk.tabFragment.ProdukTab
+import com.hfad.capstone.helper.Adapter.SectionPagerAdapter
 import com.hfad.capstone.ui.profile.tabFragment.PenggunaTab
 import com.hfad.capstone.ui.profile.tabFragment.TokoTab
 import dagger.hilt.android.AndroidEntryPoint

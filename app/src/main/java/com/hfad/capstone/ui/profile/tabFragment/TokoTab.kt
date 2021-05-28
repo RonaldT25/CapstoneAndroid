@@ -1,26 +1,22 @@
 package com.hfad.capstone.ui.profile.tabFragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
-import com.hfad.capstone.data.StoreResponse
+import com.hfad.capstone.data.Store
 import com.hfad.capstone.databinding.FragmentTokoTabBinding
-import com.hfad.capstone.helper.ApiHelper
-import com.hfad.capstone.helper.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 @AndroidEntryPoint
 class TokoTab : Fragment() {
@@ -44,7 +40,7 @@ class TokoTab : Fragment() {
 
     private fun setupObservers() {
         viewModel.store.observe(viewLifecycleOwner, Observer {
-                result -> result.let { users -> result.let { getStore(it) } }
+                result -> result.let { users -> result.let { it.data?.let { it1 -> getStore(it1) } } }
         })
     }
 
@@ -52,9 +48,9 @@ class TokoTab : Fragment() {
 
 
 
-    private fun getStore(response:StoreResponse) {
-        binding.inputNama.setHint(response.store.storeName)
-        binding.deskripsiToko.setHint(response.store.description)
+    private fun getStore(response: Store) {
+        binding.inputNama.setHint(response.storeName)
+        binding.deskripsiToko.setHint(response.description)
     }
 
     private fun updateStore(){

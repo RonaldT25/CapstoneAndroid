@@ -1,21 +1,19 @@
-package com.hfad.capstone.helper
+package com.hfad.capstone.helper.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hfad.capstone.R
-import com.hfad.capstone.data.Product
-import com.hfad.capstone.databinding.ItemListProdukBinding
+import com.hfad.capstone.databinding.ItemListReviewBinding
 import java.util.ArrayList
 
-class ProdukAdapter : RecyclerView.Adapter<ProdukAdapter.ListViewHolder>() {
+class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ListViewHolder>() {
 
-    private var listData = ArrayList<Product>()
-    var onItemClick: ((Product) -> Unit)? = null
+    private var listData = ArrayList<String>()
+    var onItemClick: ((String) -> Unit)? = null
 
-    fun setData(newListData: List<Product>?) {
+    fun setData(newListData: List<String>?) {
         if (newListData == null) return
         listData.clear()
         listData.addAll(newListData)
@@ -23,7 +21,7 @@ class ProdukAdapter : RecyclerView.Adapter<ProdukAdapter.ListViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_produk, parent, false))
+        ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_review, parent, false))
 
     override fun getItemCount() = listData.size
 
@@ -33,14 +31,10 @@ class ProdukAdapter : RecyclerView.Adapter<ProdukAdapter.ListViewHolder>() {
     }
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val binding = ItemListProdukBinding.bind(itemView)
-        fun bind(data: Product) {
+        private val binding = ItemListReviewBinding.bind(itemView)
+        fun bind(data: String) {
             with(binding) {
-                Glide.with(itemView.context)
-                        .load(data.image)
-                        .into(ivItemImage)
-                tvItemTitle.text = data.productName
-                tvItemPrice.text = data.price.toString()
+                tvReview.text = data
             }
         }
 

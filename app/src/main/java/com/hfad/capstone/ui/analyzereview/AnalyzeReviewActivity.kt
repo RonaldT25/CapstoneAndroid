@@ -4,15 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.hfad.capstone.R
 import com.hfad.capstone.databinding.ActivityAnalyzeReviewBinding
-import com.hfad.capstone.databinding.ActivityDetailBinding
-import com.hfad.capstone.helper.SectionPagerAdapter
+import com.hfad.capstone.helper.Adapter.SectionPagerAdapter
 import com.hfad.capstone.ui.analyzereview.tabfragment.NegativeFragment
 import com.hfad.capstone.ui.analyzereview.tabfragment.NeutralFragment
 import com.hfad.capstone.ui.analyzereview.tabfragment.PositiveFragment
-import com.hfad.capstone.ui.produk.tabFragment.BahanTab
-import com.hfad.capstone.ui.produk.tabFragment.ProdukTab
 
 class AnalyzeReviewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAnalyzeReviewBinding

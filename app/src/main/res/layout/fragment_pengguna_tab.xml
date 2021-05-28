@@ -60,13 +60,15 @@
                 android:id="@+id/changePassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:background="@color/transparent"
                 android:text="@string/ganti_sandi"
                 android:textColor="@color/blue"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
             <EditText
                 android:id="@+id/input_nama"
@@ -80,7 +82,6 @@
                 android:textColor="@color/blue"
                 android:textSize="13sp"
                 app:layout_constraintTop_toBottomOf="@+id/detailnama" />
-
 
 
             <TextView
@@ -122,12 +123,12 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="64dp"
-                app:backgroundTint="@color/blue"
                 android:background="@drawable/shape_bg_blue"
                 android:backgroundTint="@color/lightblue"
                 android:shadowColor="@color/blue"
                 android:text="@string/edit_profile"
                 android:textColor="@color/white"
+                app:backgroundTint="@color/blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/email" />
