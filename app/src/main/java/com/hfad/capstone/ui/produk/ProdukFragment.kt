@@ -14,8 +14,9 @@ import com.hfad.capstone.helper.SectionPagerAdapter
 import com.hfad.capstone.ui.add.AddActivity
 import com.hfad.capstone.ui.produk.tabFragment.BahanTab
 import com.hfad.capstone.ui.produk.tabFragment.ProdukTab
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ProdukFragment : Fragment() {
     private var _binding: FragmentProdukBinding? = null
     private val binding get() = _binding!!

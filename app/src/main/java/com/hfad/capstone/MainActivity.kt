@@ -11,7 +11,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hfad.capstone.databinding.ActivityLoginBinding
 import com.hfad.capstone.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

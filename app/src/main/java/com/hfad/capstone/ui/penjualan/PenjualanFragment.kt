@@ -5,29 +5,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.Transaction
-import com.hfad.capstone.databinding.FragmentDashboardBinding
+import com.hfad.capstone.data.database.Resource
+import com.hfad.capstone.data.database.TransactionEntity
 import com.hfad.capstone.databinding.FragmentPenjualanBinding
-import com.hfad.capstone.databinding.FragmentProdukBinding
-import com.hfad.capstone.helper.*
-import com.hfad.capstone.ui.dashboard.DashboardViewModel
-import com.hfad.capstone.ui.detail.DetailActivity
+import com.hfad.capstone.helper.DataMapper
+import com.hfad.capstone.helper.TransactionAdapter
 import com.hfad.capstone.ui.detail.DetailTransaction
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import retrofit2.Response
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PenjualanFragment : Fragment() {
     private var _binding: FragmentPenjualanBinding? = null
-    private lateinit var viewModel: PenjualanViewModel
+    private val viewModel: PenjualanViewModel by viewModels()
     private val binding get() = _binding!!
     private lateinit var clientRetrofit: ClientRetrofit
     private lateinit var transactionAdapter:TransactionAdapter
@@ -39,43 +35,20 @@ class PenjualanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         clientRetrofit = ClientRetrofit()
         transactionAdapter = TransactionAdapter()
-        setupViewModel()
         setupObservers()
     }
 
     private fun setupObservers() {
-        viewModel.readTransaction().observe(viewLifecycleOwner, Observer {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        binding.progressBar.visibility = View.GONE
-                        resource.data?.let { users -> getTransactions(users) }
-                    }
-                    Status.ERROR -> {
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                    }
-                    Status.LOADING -> {
-                        binding.progressBar.visibility = View.VISIBLE
-                    }
-                }
-            }
+        viewModel.transactions.observe(viewLifecycleOwner, Observer {
+                result -> result.let { users -> result.data?.let { getTransactions(it) } }
+            binding.progressBar.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
         })
     }
 
-    private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(
-            this,
-            context?.let { clientRetrofit.getApiService(it) }?.let { ApiHelper(it) }?.let {
-                ViewModelFactory(
-                    it
-                )
-            }
-        ).get(PenjualanViewModel::class.java)
-    }
 
-    private fun getTransactions(response : Response<List<Transaction>>) {
-        val  listProduct = response.body()
+
+    private fun getTransactions(response : List<TransactionEntity>) {
+        val  listProduct = response
         listProduct.let {
             transactionAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailTransaction::class.java)
@@ -83,8 +56,8 @@ class PenjualanFragment : Fragment() {
                 startActivity(intent)
             }
 
-            transactionAdapter.setData(listProduct)
-            binding.progressBar.visibility = View.GONE
+            transactionAdapter.setData(DataMapper.mapEntitiesToDomain(listProduct))
+
             with(binding.rvTransaction) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)

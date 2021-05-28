@@ -6,17 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.Product
 import com.hfad.capstone.data.Transaction
+import com.hfad.capstone.data.database.Resource
 import com.hfad.capstone.databinding.FragmentProdukTabBinding
 import com.hfad.capstone.helper.*
 import com.hfad.capstone.ui.detail.DetailActivity
 import com.hfad.capstone.ui.penjualan.PenjualanViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -24,9 +28,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@AndroidEntryPoint
 class ProdukTab : Fragment() {
     private var _binding: FragmentProdukTabBinding? = null
-    private lateinit var viewModel: ProdukTabViewModel
+    private val viewModel: ProdukTabViewModel by viewModels()
     private val binding get() = _binding!!
     private lateinit var clientRetrofit: ClientRetrofit
     private lateinit var produkAdapter: ProdukAdapter
@@ -39,40 +44,17 @@ class ProdukTab : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         clientRetrofit = ClientRetrofit()
         produkAdapter = ProdukAdapter()
-        setupViewModel()
         setupObservers()
     }
 
     private fun setupObservers() {
-        viewModel.readProduct().observe(viewLifecycleOwner, Observer {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        resource.data?.let { users -> getProducts(users) }
-                    }
-                    Status.ERROR -> {
-                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                    }
-                    Status.LOADING -> {
-                    }
-                }
-            }
+        viewModel.products.observe(viewLifecycleOwner, Observer {
+                result -> result.let { users -> result.data?.let { getProducts(it) } }
         })
     }
 
-    private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(
-            this,
-            context?.let { clientRetrofit.getApiService(it) }?.let { ApiHelper(it) }?.let {
-                ViewModelFactory(
-                    it
-                )
-            }
-        ).get(ProdukTabViewModel::class.java)
-    }
-
-    private fun getProducts(response : Response<List<Product>>){
-        val  listProduct = response.body()!!
+    private fun getProducts(response : List<Product>){
+        val  listProduct = response
         listProduct.let {
             produkAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailActivity::class.java)

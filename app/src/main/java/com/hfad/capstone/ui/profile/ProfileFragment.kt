@@ -17,8 +17,9 @@ import com.hfad.capstone.ui.produk.tabFragment.BahanTab
 import com.hfad.capstone.ui.produk.tabFragment.ProdukTab
 import com.hfad.capstone.ui.profile.tabFragment.PenggunaTab
 import com.hfad.capstone.ui.profile.tabFragment.TokoTab
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!

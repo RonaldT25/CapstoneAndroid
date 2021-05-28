@@ -33,7 +33,7 @@ interface Api {
     ): Call<ResponseAuth>
 
     @GET(Constants.GETPROFILE_URL)
-    suspend fun getProfile() :Response<User>
+    suspend fun getProfile() :User
 
     @PUT(Constants.GETPROFILE_URL)
     @FormUrlEncoded
@@ -56,7 +56,7 @@ interface Api {
                       @Field("image") image:String) : Response<Product>
 
     @GET(Constants.READPRODUCT_URL)
-    suspend fun readProduct() : Response<List<Product>>
+    suspend fun readProduct() : List<Product>
 
     @PUT("api/users/stores/products/{productId}")
     @FormUrlEncoded
@@ -79,7 +79,7 @@ interface Api {
     ): Response<Composition>
 
     @GET(Constants.READCOMPOSITION_URL)
-    suspend fun readComposition(): Response<List<Composition>>
+    suspend fun readComposition(): List<Composition>
 
     @PUT("api/users/stores/compositions/{compositionId}")
     @FormUrlEncoded
@@ -92,7 +92,7 @@ interface Api {
 
 
     @GET(Constants.READSTORE_URL)
-    suspend fun readStore() : Response<StoreResponse>
+    suspend fun readStore() : StoreResponse
 
     @PUT(Constants.READSTORE_URL)
     @FormUrlEncoded
@@ -103,6 +103,6 @@ interface Api {
     suspend fun readCrawlKomentar(@Path("productId") productId:Int ) : Response<ReviewResponse>
 
     @GET(Constants.TRANSACTION_URL)
-    suspend fun readTransaction() : Response<List<Transaction>>
+    suspend fun readTransaction() : List<Transaction>
 
 }

@@ -1,11 +1,14 @@
 package com.hfad.capstone.data
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+@Entity(tableName = "product")
 data class Product(
-        val id:Int,
+        @PrimaryKey val id:Int,
         val productName: String,
         val storeId: Int,
         val price: Int,
