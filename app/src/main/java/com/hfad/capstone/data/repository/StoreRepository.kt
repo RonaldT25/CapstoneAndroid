@@ -22,7 +22,6 @@ class StoreRepository @Inject constructor(
             },
             saveFetchResult = { products ->
                 db.withTransaction {
-                    storeDao.deleteAllStores()
                     storeDao.insertStore(products.store)
                 }
             }

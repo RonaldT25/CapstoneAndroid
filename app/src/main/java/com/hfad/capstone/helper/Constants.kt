@@ -1,7 +1,7 @@
 package com.hfad.capstone.helper
 
 object Constants {
-    const val BASE_URL = "http://34.101.125.133:3000/"
+    const val BASE_URL = "http://35.219.41.213:3000/"
     const val REGISTER_URL = "api/users/register"
     const val LOGIN_URL = "api/users/login"
     const val GETPROFILE_URL = "api/users/profile/"

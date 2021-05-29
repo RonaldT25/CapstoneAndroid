@@ -1,6 +1,8 @@
 package com.hfad.capstone.ui.analyzereview.tabfragment
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.database.Resource
 import com.hfad.capstone.data.database.ReviewResponseEntity
@@ -50,6 +53,14 @@ class PositiveFragment : Fragment() {
         val reviewAdapter = ReviewAdapter()
         val  listReview = response.positiveReview
         reviewAdapter.setData(listReview)
+        val base64String = response.image.positive
+        val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        context?.let {
+            Glide.with(it)
+                    .load(decodedImage)
+                    .into(binding.imageView)
+        }
         with(binding.rvReview) {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)

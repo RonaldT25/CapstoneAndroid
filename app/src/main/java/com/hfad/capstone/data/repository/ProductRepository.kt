@@ -21,7 +21,6 @@ class ProductRepository @Inject constructor(
         },
         saveFetchResult = { products ->
             db.withTransaction {
-                productDao.deleteAllProducts()
                 productDao.insertProducts(products)
             }
         }

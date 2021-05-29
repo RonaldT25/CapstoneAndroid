@@ -26,7 +26,6 @@ class ReviewResponseRepository @Inject constructor(
         },
         saveFetchResult = { review ->
             db.withTransaction {
-                reviewResponseDao.deleteAllReview()
                 reviewResponseDao.insertReview(DataMapper.mapReviewResponsesToEntities(review,productId))
             }
         }

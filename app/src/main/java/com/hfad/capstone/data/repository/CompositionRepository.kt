@@ -22,7 +22,6 @@ class CompositionRepository @Inject constructor(
         },
         saveFetchResult = { compositions ->
             db.withTransaction {
-                compositionDao.deleteAllCompositions()
                 compositionDao.insertCompositions(compositions)
             }
         }

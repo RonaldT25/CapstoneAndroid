@@ -49,6 +49,14 @@ class NeutralFragment : Fragment() {
         val reviewAdapter = ReviewAdapter()
         val  listReview = response.neutralReview
         reviewAdapter.setData(listReview)
+        val base64String = response.image.neutral
+        val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        context?.let {
+            Glide.with(it)
+                    .load(decodedImage)
+                    .into(binding.imageView)
+        }
         with(binding.rvReview) {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
