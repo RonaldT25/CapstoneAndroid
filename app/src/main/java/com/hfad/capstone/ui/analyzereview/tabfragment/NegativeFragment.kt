@@ -49,9 +49,7 @@ class NegativeFragment : Fragment() {
     }
 
     private fun getReview(response : ReviewResponseEntity){
-        binding.progressBar.visibility = View.VISIBLE
         val reviewAdapter = ReviewAdapter()
-        binding.progressBar.visibility = View.GONE
         val  listReview = response.negativeReview
         reviewAdapter.setData(listReview)
         with(binding.rvReview) {

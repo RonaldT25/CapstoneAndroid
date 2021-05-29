@@ -47,13 +47,9 @@ class PositiveFragment : Fragment() {
     }
 
     private fun getReview(response : ReviewResponseEntity){
-        binding.progressBar.visibility = View.VISIBLE
         val reviewAdapter = ReviewAdapter()
-        binding.progressBar.visibility = View.GONE
         val  listReview = response.positiveReview
-
         reviewAdapter.setData(listReview)
-
         with(binding.rvReview) {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
