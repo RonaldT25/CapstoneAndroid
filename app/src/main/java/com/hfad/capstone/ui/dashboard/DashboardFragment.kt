@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.User
 import com.hfad.capstone.databinding.FragmentDashboardBinding
@@ -25,6 +26,7 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.dashboardGreetings.text = ""
         setupObservers()
     }
 
@@ -38,9 +40,10 @@ class DashboardFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun getProfile(response:User){
-        binding.dashboardGreetings.text = binding.dashboardGreetings.text.toString()+ (response.username)
+        binding.dashboardGreetings.text = getString(R.string.example) + (response.username)
     }
     override fun onDestroyView() {
+
         super.onDestroyView()
         _binding = null
     }

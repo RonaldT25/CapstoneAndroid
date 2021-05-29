@@ -75,4 +75,10 @@ object AppModule {
     fun provideStoreDatabase(app: Application) : StoreDatabase =
             Room.databaseBuilder(app, StoreDatabase::class.java, "store_database")
                     .build()
+
+    @Provides
+    @Singleton
+    fun provideReviewDatabase(app: Application) : ReviewResponseDatabase =
+        Room.databaseBuilder(app, ReviewResponseDatabase::class.java, "review_database")
+            .build()
 }

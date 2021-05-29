@@ -16,6 +16,7 @@ import com.hfad.capstone.data.database.TransactionEntity
 import com.hfad.capstone.databinding.FragmentPenjualanBinding
 import com.hfad.capstone.helper.Adapter.TransactionAdapter
 import com.hfad.capstone.helper.DataMapper
+import com.hfad.capstone.ui.add.AddActivity
 import com.hfad.capstone.ui.detail.DetailTransaction
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,6 +35,7 @@ class PenjualanFragment : Fragment() {
         transactionAdapter = TransactionAdapter()
         setupObservers()
         searching(binding.searchView)
+        setFab()
     }
 
     private fun searching(search: SearchView) {
@@ -80,6 +82,14 @@ class PenjualanFragment : Fragment() {
                 adapter = transactionAdapter
             }
     }}
+
+    private fun setFab(){
+        binding.fab.setOnClickListener{
+            val intent = Intent(activity, AddActivity::class.java)
+            intent.putExtra(AddActivity.EXTRA_ID, 2)
+            startActivity(intent)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -9,7 +9,9 @@ import com.hfad.capstone.helper.Adapter.SectionPagerAdapter
 import com.hfad.capstone.ui.analyzereview.tabfragment.NegativeFragment
 import com.hfad.capstone.ui.analyzereview.tabfragment.NeutralFragment
 import com.hfad.capstone.ui.analyzereview.tabfragment.PositiveFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AnalyzeReviewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAnalyzeReviewBinding
     private lateinit var pTabs: TabLayout

@@ -1,7 +1,9 @@
 package com.hfad.capstone.helper
 
 import com.hfad.capstone.data.Product
+import com.hfad.capstone.data.ReviewResponse
 import com.hfad.capstone.data.Transaction
+import com.hfad.capstone.data.database.ReviewResponseEntity
 import com.hfad.capstone.data.database.TransactionEntity
 
 object DataMapper {
@@ -31,6 +33,26 @@ object DataMapper {
                 product = it.product
             )
         }
+    fun mapReviewResponsesToEntities(input: ReviewResponse,productId:Int): ReviewResponseEntity {
+        val reviewresponse = ReviewResponseEntity(
+            productId,
+            input.negative,
+            input.neutral,
+            input.positive,
+            input.image
+        )
+    return  reviewresponse
+    }
+    fun mapReviewEntitiesToDomain(input: ReviewResponseEntity): ReviewResponse {
+        val reviewresponse = ReviewResponse(
+            input.negativeReview,
+            input.neutralReview,
+            input.positiveReview,
+            input.image
+        )
+        return  reviewresponse
+    }
+
 
 
 }

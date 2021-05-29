@@ -24,8 +24,16 @@ class AddActivity : AppCompatActivity() {
             val fragment = AddProduk()
             transaction.replace(R.id.fragment_holder,fragment)
         }
-        else{
+        else if (extras==1){
             val fragment = AddBahan()
+            transaction.replace(R.id.fragment_holder,fragment)
+        }
+        else if (extras==2){
+            val fragment = AddTransaction()
+            transaction.replace(R.id.fragment_holder,fragment)
+        }
+        else if (extras==3){
+            val fragment = AddDetailBahanBaku()
             transaction.replace(R.id.fragment_holder,fragment)
         }
 
