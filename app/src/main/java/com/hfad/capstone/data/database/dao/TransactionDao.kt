@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.hfad.capstone.data.Transaction
 import com.hfad.capstone.data.database.TransactionEntity
 import kotlinx.coroutines.flow.Flow
 

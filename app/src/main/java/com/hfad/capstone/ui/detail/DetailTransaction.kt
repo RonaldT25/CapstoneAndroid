@@ -3,9 +3,7 @@ package com.hfad.capstone.ui.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.hfad.capstone.R
-import com.hfad.capstone.data.Product
-import com.hfad.capstone.data.Transaction
-import com.hfad.capstone.databinding.ActivityDetailBinding
+import com.hfad.capstone.data.model.Transaction
 import com.hfad.capstone.databinding.ActivityDetailTransactionBinding
 
 class DetailTransaction : AppCompatActivity() {

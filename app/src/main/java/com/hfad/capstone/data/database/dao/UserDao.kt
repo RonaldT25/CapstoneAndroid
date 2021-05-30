@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.hfad.capstone.data.User
+import com.hfad.capstone.data.model.User
 import kotlinx.coroutines.flow.Flow
 
 

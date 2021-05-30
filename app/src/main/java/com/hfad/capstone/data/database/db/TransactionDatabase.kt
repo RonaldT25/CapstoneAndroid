@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.hfad.capstone.data.database.TransactionEntity
 import com.hfad.capstone.data.database.dao.TransactionDao
 
-@Database(entities = [TransactionEntity::class],version = 1)
+@Database(entities = [TransactionEntity::class],version = 1,exportSchema = false)
 abstract class TransactionDatabase : RoomDatabase() {
 
     abstract fun transactionDao() : TransactionDao

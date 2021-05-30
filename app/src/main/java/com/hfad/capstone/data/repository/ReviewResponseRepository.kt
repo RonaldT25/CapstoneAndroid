@@ -31,5 +31,20 @@ class ReviewResponseRepository @Inject constructor(
         }
     )
 
+    fun getReviewFromDb(productId:Int) = networkBoundResource(
+            query = {
+                reviewResponseDao.getReview(productId)
+            },
+            fetch = {
+                api.readCrawlKomentar(productId)
+            },
+            saveFetchResult = { review ->
+                db.withTransaction {
+                    reviewResponseDao.insertReview(DataMapper.mapReviewResponsesToEntities(review,productId))
+                }
+            },
+            shouldFetch = { false }
+    )
+
 
 }

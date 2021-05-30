@@ -5,16 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hfad.capstone.R
-import com.hfad.capstone.data.model.Composition
+import com.hfad.capstone.data.database.CompositionDetailEntity
 import com.hfad.capstone.databinding.ItemListCompositionBinding
 import java.util.*
 
-class CompositionAdapter : RecyclerView.Adapter<CompositionAdapter.ListViewHolder>() {
+class DetailCompositionAdapter : RecyclerView.Adapter<DetailCompositionAdapter.ListViewHolder>() {
 
-    private var listData = ArrayList<Composition>()
-    var onItemClick: ((Composition) -> Unit)? = null
+    private var listData = ArrayList<CompositionDetailEntity>()
+    var onItemClick: ((CompositionDetailEntity) -> Unit)? = null
 
-    fun setData(newListData: List<Composition>?) {
+    fun setData(newListData: List<CompositionDetailEntity>?) {
         if (newListData == null) return
         listData.clear()
         listData.addAll(newListData)
@@ -22,7 +22,7 @@ class CompositionAdapter : RecyclerView.Adapter<CompositionAdapter.ListViewHolde
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_composition, parent, false))
+            ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_composition, parent, false))
 
     override fun getItemCount() = listData.size
 
@@ -33,10 +33,10 @@ class CompositionAdapter : RecyclerView.Adapter<CompositionAdapter.ListViewHolde
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemListCompositionBinding.bind(itemView)
-        fun bind(data: Composition) {
+        fun bind(data: CompositionDetailEntity) {
             with(binding) {
-                tvCompositionTitle.text = data.compositionName
-                tvCompositionUnit.text = data.unit
+                tvCompositionTitle.text = data.composition.compositionName
+                tvCompositionUnit.text = data.amount.toString()
             }
         }
 

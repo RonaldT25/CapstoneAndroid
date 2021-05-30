@@ -11,6 +11,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -23,13 +24,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideClient(app: Application): OkHttpClient =
+    fun provideClient(app: Application):OkHttpClient =
         OkHttpClient.Builder()
-            .connectTimeout(5, TimeUnit.MINUTES)
-            .writeTimeout(5, TimeUnit.MINUTES)
-            .readTimeout(5, TimeUnit.MINUTES)
-            .addInterceptor(AuthInterceptor(app))
-            .build()
+                .connectTimeout(5, TimeUnit.MINUTES)
+                .writeTimeout(5, TimeUnit.MINUTES)
+                .readTimeout(5, TimeUnit.MINUTES)
+                .addInterceptor(AuthInterceptor(app))
+                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .build()
 
 
     @Provides
@@ -62,7 +64,7 @@ object AppModule {
     @Singleton
     fun provideCompositionDatabase(app: Application) : CompositionDatabase =
         Room.databaseBuilder(app, CompositionDatabase::class.java, "composition_database")
-            .build()
+                .fallbackToDestructiveMigration().build()
 
     @Provides
     @Singleton
@@ -81,4 +83,11 @@ object AppModule {
     fun provideReviewDatabase(app: Application) : ReviewResponseDatabase =
         Room.databaseBuilder(app, ReviewResponseDatabase::class.java, "review_database")
             .build()
+
+    @Provides
+    @Singleton
+    fun provideCompositionDetailDatabase(app: Application) : CompositionDetailDatabase =
+            Room.databaseBuilder(app, CompositionDetailDatabase::class.java, "composition_detail_database")
+                    .build()
+
 }

@@ -11,10 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PositiveFragmentViewModel @Inject constructor(private val repository: ReviewResponseRepository) : ViewModel() {
-
-
     fun getReview(id:Int): LiveData<Resource<ReviewResponseEntity>> {
-        return repository.getReview(id).asLiveData()
+        return repository.getReviewFromDb(id).asLiveData()
     }
-
 }

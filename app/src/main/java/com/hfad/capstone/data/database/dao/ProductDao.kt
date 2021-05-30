@@ -4,8 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.hfad.capstone.data.Product
-import com.hfad.capstone.data.database.TransactionEntity
+import com.hfad.capstone.data.model.Product
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -16,4 +15,6 @@ interface ProductDao {
     suspend fun insertProducts(Products : List<Product>)
     @Query("DELETE FROM product")
     suspend fun deleteAllProducts()
+    @Query("SELECT id FROM product WHERE productName LIKE :searchQuery")
+    fun search(searchQuery:String) : Flow<Int>
 }

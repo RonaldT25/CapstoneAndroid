@@ -1,7 +1,7 @@
 package com.hfad.capstone.api
 
 
-import com.hfad.capstone.data.*
+import com.hfad.capstone.data.model.*
 import com.hfad.capstone.helper.Constants
 import retrofit2.Call
 import retrofit2.Response
@@ -33,7 +33,7 @@ interface Api {
     ): Call<ResponseAuth>
 
     @GET(Constants.GETPROFILE_URL)
-    suspend fun getProfile() :User
+    suspend fun getProfile() : User
 
     @PUT(Constants.GETPROFILE_URL)
     @FormUrlEncoded
@@ -91,6 +91,16 @@ interface Api {
     suspend fun deleteComposition(@Path("compositionId") compositionId:Int) : Response<updateResponse>
 
 
+    @GET("api/users/stores/products/{productId}/compositions/")
+    suspend fun readCompositionDetail(@Path("productId") productId:Int) : List<CompositionDetail>
+
+    @POST("api/users/stores/products/{productId}/compositions/")
+    @FormUrlEncoded
+    suspend fun insertCompositionDetail(@Path("productId") productId:Int,
+                                        @Field("compositionId") compositionId:Int,
+                                        @Field("productId") productId2:Int,
+                                        @Field("amount") amount:Float,) : Response<updateResponse>
+
     @GET(Constants.READSTORE_URL)
     suspend fun readStore() : StoreResponse
 
@@ -104,5 +114,13 @@ interface Api {
 
     @GET(Constants.TRANSACTION_URL)
     suspend fun readTransaction() : List<Transaction>
+
+    @POST("api/users/stores/products/{productId}/transactions")
+    @FormUrlEncoded
+    suspend fun insertTransaction(@Path("productId") productId:Int,
+                                        @Field("productId") productId2:Int,
+                                        @Field("time") time:String,
+                                        @Field("amount") amount:Int,) : Response<updateResponse>
+
 
 }

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hfad.capstone.R
-import com.hfad.capstone.data.Transaction
+import com.hfad.capstone.data.model.Transaction
 import com.hfad.capstone.databinding.ItemListTransactionBinding
 import java.util.ArrayList
 

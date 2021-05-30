@@ -7,16 +7,11 @@ import android.widget.Toast
 import com.hfad.capstone.MainActivity
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
-import com.hfad.capstone.data.Composition
-import com.hfad.capstone.data.updateResponse
+import com.hfad.capstone.data.model.Composition
 import com.hfad.capstone.databinding.ActivityDetailCompostionBinding
-import com.hfad.capstone.helper.SessionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DetailComposition : AppCompatActivity() {
     companion object{
@@ -58,7 +53,7 @@ class DetailComposition : AppCompatActivity() {
             GlobalScope.launch(Dispatchers.Main) {
                 extras?.let { it1 ->
                     val response = clientRetrofit.getApiService(this@DetailComposition).updateComposition(
-                        it1.id,
+                        it1.compositionId,
                         it1.compositionName,
                         binding.editTextUnit.text.toString()
                     )
@@ -76,7 +71,7 @@ class DetailComposition : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.Main) {
             extras?.let { it1 ->
-                val response = clientRetrofit.getApiService(this@DetailComposition).deleteComposition(it1.id)
+                val response = clientRetrofit.getApiService(this@DetailComposition).deleteComposition(it1.compositionId)
                 if (response.isSuccessful) {
                     Toast.makeText(this@DetailComposition, response.body()?.message, Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@DetailComposition, MainActivity::class.java)

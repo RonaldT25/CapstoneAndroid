@@ -85,4 +85,12 @@
     <string name="dashobard_text">Page Description</string>
     <string name="detail_penjualan">Detail Penjualan</string>
     <string name="terjual">Terjual</string>
+    <string name="detail_terjual">Terjual</string>
+    <string name="detail_bahan">Detail Bahan</string>
+    <string name="input_jumlah">Masukkan jumlah</string>
+    <string name="newtransaction">Penjualan Baru</string>
+    <string name="logOut"><u>LOG OUT</u></string>
+    <string name="jumlah"><u>0</u></string>
+    <string name="add_bahan">Tambah Bahan</string>
+
 </resources>

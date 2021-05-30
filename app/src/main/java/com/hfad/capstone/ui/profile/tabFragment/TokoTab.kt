@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
-import com.hfad.capstone.data.Store
+import com.hfad.capstone.data.model.Store
 import com.hfad.capstone.databinding.FragmentTokoTabBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers

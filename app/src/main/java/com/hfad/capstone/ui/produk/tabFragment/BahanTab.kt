@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hfad.capstone.api.ClientRetrofit
-import com.hfad.capstone.data.Composition
+import com.hfad.capstone.data.model.Composition
 import com.hfad.capstone.databinding.FragmentBahanTabBinding
 import com.hfad.capstone.helper.Adapter.CompositionAdapter
 import com.hfad.capstone.ui.detail.DetailComposition

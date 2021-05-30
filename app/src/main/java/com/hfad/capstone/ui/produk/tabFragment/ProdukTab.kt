@@ -9,8 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hfad.capstone.api.ClientRetrofit
-import com.hfad.capstone.data.Product
+import com.hfad.capstone.data.model.Product
 import com.hfad.capstone.databinding.FragmentProdukTabBinding
 import com.hfad.capstone.helper.Adapter.ProdukAdapter
 import com.hfad.capstone.ui.detail.DetailActivity

@@ -6,15 +6,12 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.hfad.capstone.MainActivity
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
-import com.hfad.capstone.data.ResponseAuth
-import com.hfad.capstone.data.StoreResponse
+import com.hfad.capstone.data.model.ResponseAuth
 import com.hfad.capstone.databinding.ActivityLoginBinding
 import com.hfad.capstone.helper.SessionManager
 import retrofit2.Call

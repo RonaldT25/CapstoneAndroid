@@ -13,9 +13,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
-import com.hfad.capstone.data.User
+import com.hfad.capstone.data.model.User
 import com.hfad.capstone.databinding.FragmentPenggunaTabBinding
+import com.hfad.capstone.helper.SessionManager
 import com.hfad.capstone.ui.ChangePasswordActivity
+import com.hfad.capstone.ui.auth.Login
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -26,10 +28,12 @@ class PenggunaTab : Fragment() {
     private var _binding: FragmentPenggunaTabBinding? = null
     private val binding get() = _binding!!
     private lateinit var clientRetrofit: ClientRetrofit
+    private lateinit var sessionManager: SessionManager
     private val viewModel: PenggunaTabViewModel by viewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPenggunaTabBinding.inflate(inflater, container, false)
         clientRetrofit = ClientRetrofit()
+        sessionManager = SessionManager(requireContext())
         return binding.root
     }
 
@@ -42,6 +46,11 @@ class PenggunaTab : Fragment() {
             val intent = Intent(context, ChangePasswordActivity::class.java)
             startActivity(intent)
         }
+        binding.logOut.setOnClickListener {
+            sessionManager.saveAuthToken("")
+            val intent = Intent(context, Login::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupObservers() {
@@ -52,7 +61,7 @@ class PenggunaTab : Fragment() {
 
 
 
-    private fun getProfile(response:User) {
+    private fun getProfile(response: User) {
         binding.inputNama.setHint(response.username)
         binding.email.setHint(response.email)
     }

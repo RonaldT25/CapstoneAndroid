@@ -1,8 +1,9 @@
 package com.hfad.capstone.helper
 
-import com.hfad.capstone.data.Product
-import com.hfad.capstone.data.ReviewResponse
-import com.hfad.capstone.data.Transaction
+import com.hfad.capstone.data.model.CompositionDetail
+import com.hfad.capstone.data.model.ReviewResponse
+import com.hfad.capstone.data.model.Transaction
+import com.hfad.capstone.data.database.CompositionDetailEntity
 import com.hfad.capstone.data.database.ReviewResponseEntity
 import com.hfad.capstone.data.database.TransactionEntity
 
@@ -33,7 +34,7 @@ object DataMapper {
                 product = it.product
             )
         }
-    fun mapReviewResponsesToEntities(input: ReviewResponse,productId:Int): ReviewResponseEntity {
+    fun mapReviewResponsesToEntities(input: ReviewResponse, productId:Int): ReviewResponseEntity {
         val reviewresponse = ReviewResponseEntity(
             productId,
             input.negative,
@@ -52,6 +53,33 @@ object DataMapper {
         )
         return  reviewresponse
     }
+
+    fun mapCompositionDetailToEntities(input: List<CompositionDetail>): List<CompositionDetailEntity> {
+        val transactionList = ArrayList<CompositionDetailEntity>()
+        input.map {
+            val transaction = CompositionDetailEntity(
+                    it.compositionId,
+                    it.productId,
+                    it.amount,
+                    it.composition,
+                    it.product
+            )
+            transactionList.add(transaction)
+        }
+        return transactionList
+    }
+    fun mapCompositionDetailToDomain(input: List<CompositionDetailEntity>): List<CompositionDetail> =
+            input.map {
+                CompositionDetail(
+                        id = it.CompositionDetailId,
+                        compositionId = it.composition.compositionId,
+                      productId =  it.productId,
+                       amount =  it.amount,
+                        composition = it.composition,
+                        product = it.product
+
+                )
+            }
 
 
 

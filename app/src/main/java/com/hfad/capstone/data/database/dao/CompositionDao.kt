@@ -4,8 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.hfad.capstone.data.Composition
-import com.hfad.capstone.data.Product
+import com.hfad.capstone.data.model.Composition
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -16,4 +15,6 @@ interface CompositionDao {
     suspend fun insertCompositions(Compositions : List<Composition>)
     @Query("DELETE FROM composition")
     suspend fun deleteAllCompositions()
+    @Query("SELECT compositionId FROM composition WHERE compositionName LIKE :searchQuery")
+    fun search(searchQuery:String) : Flow<Int>
 }

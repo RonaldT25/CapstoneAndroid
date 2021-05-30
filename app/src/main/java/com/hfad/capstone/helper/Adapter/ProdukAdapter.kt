@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hfad.capstone.R
-import com.hfad.capstone.data.Product
+import com.hfad.capstone.data.model.Product
 import com.hfad.capstone.databinding.ItemListProdukBinding
 import java.util.ArrayList
 

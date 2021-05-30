@@ -3,12 +3,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.add.AddTransaction">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/detail_card_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="ADD TRANSACTION" />
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="5dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:contentPaddingBottom="16dp"
+        app:contentPaddingLeft="16dp"
+        app:contentPaddingRight="16dp"
+        app:layout_constraintTop_toBottomOf="@id/view3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/addTransaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingStart="4dp"
+                android:text="@string/newtransaction"
+                android:textColor="@color/darkblue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/detailproduk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:minHeight="32dp"
+                android:paddingStart="4dp"
+                android:text="@string/produk"
+                android:textColor="@color/lightblue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addTransaction" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/spinner_produk"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="201dp"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailproduk">
+
+                <AutoCompleteTextView
+                    android:id="@+id/ACTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:text="TESTING" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/detail_produk_terjual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:minHeight="32dp"
+                android:paddingStart="4dp"
+                android:text="@string/detail_terjual"
+                android:textColor="@color/lightblue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_produk" />
+
+            <EditText
+                android:id="@+id/harga_produk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="4dp"
+                android:textColor="@color/blue"
+                android:textSize="13sp"
+                android:maxLines="5"
+                android:lines="5"
+                android:inputType="textEmailAddress"
+                app:layout_constraintTop_toBottomOf="@+id/detail_produk_terjual"
+                android:autofillHints="@string/input_jumlah"
+                android:hint="@string/input_jumlah"
+                />
+
+            <Button
+                android:id="@+id/btnAddProduk"
+                android:layout_width="276dp"
+                android:layout_height="41dp"
+                android:layout_gravity="center"
+                android:layout_margin="40dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="64dp"
+                android:background="@drawable/shape_bg_blue"
+                android:backgroundTint="@color/lightblue"
+                android:shadowColor="@color/blue"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/harga_produk" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </FrameLayout>

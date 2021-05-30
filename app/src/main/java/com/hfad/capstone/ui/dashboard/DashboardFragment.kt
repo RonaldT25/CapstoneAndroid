@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.hfad.capstone.R
-import com.hfad.capstone.api.ClientRetrofit
-import com.hfad.capstone.data.User
+import com.hfad.capstone.data.model.User
 import com.hfad.capstone.databinding.FragmentDashboardBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +38,7 @@ class DashboardFragment : Fragment() {
 
 
     @SuppressLint("SetTextI18n")
-    private fun getProfile(response:User){
+    private fun getProfile(response: User){
         binding.dashboardGreetings.text = getString(R.string.example) + (response.username)
     }
     override fun onDestroyView() {

@@ -7,7 +7,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
-import com.hfad.capstone.data.ImageCrawl
+import com.hfad.capstone.data.model.ImageCrawl
 
 @Entity(tableName = "review")
 data class ReviewResponseEntity (

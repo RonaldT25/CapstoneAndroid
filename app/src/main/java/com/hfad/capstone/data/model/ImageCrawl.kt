@@ -1,4 +1,4 @@
-package com.hfad.capstone.data
+package com.hfad.capstone.data.model
 
 data class ImageCrawl (
         val positive:String,

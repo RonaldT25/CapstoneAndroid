@@ -4,6 +4,7 @@ import androidx.room.withTransaction
 import com.hfad.capstone.api.Api
 import com.hfad.capstone.data.database.db.ProductDatabase
 import com.hfad.capstone.data.database.networkBoundResource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ProductRepository @Inject constructor(
@@ -21,8 +22,13 @@ class ProductRepository @Inject constructor(
         },
         saveFetchResult = { products ->
             db.withTransaction {
+                productDao.deleteAllProducts()
                 productDao.insertProducts(products)
             }
         }
     )
+
+    fun search(searchQuery:String) : Flow<Int> {
+        return productDao.search(searchQuery)
+    }
 }

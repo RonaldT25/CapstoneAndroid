@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
-import com.hfad.capstone.data.ResponseAuth
+import com.hfad.capstone.data.model.ResponseAuth
 import com.hfad.capstone.databinding.ActivityRegisterBinding
 import retrofit2.Call
 import retrofit2.Callback

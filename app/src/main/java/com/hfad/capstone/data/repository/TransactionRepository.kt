@@ -24,6 +24,7 @@ class TransactionRepository @Inject constructor(
         },
         saveFetchResult = { transactions ->
             db.withTransaction {
+                transactionDao.deleteAllTransactions()
                 transactionDao.insertTransactions(DataMapper.mapResponsesToEntities(transactions))
             }
         }

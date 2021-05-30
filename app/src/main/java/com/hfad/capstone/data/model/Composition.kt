@@ -1,15 +1,18 @@
-package com.hfad.capstone.data
+package com.hfad.capstone.data.model
 
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = "composition")
 data class Composition(
-    @PrimaryKey val id:Int,
+        @SerializedName("id")
+    @PrimaryKey val compositionId:Int,
     val compositionName: String,
-    val storeId: Int,
+        @SerializedName("storeId")
+    val compositionStoreId: Int,
     val unit: String
 ) : Parcelable
