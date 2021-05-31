@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.database.Resource
 import com.hfad.capstone.data.database.ReviewResponseEntity

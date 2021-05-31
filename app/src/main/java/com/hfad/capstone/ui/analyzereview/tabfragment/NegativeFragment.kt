@@ -63,6 +63,7 @@ class NegativeFragment : Fragment() {
             Glide.with(it)
                 .load(decodedImage)
                 .into(binding.imageView)
+
         }
         with(binding.rvReview) {
             layoutManager = LinearLayoutManager(context)

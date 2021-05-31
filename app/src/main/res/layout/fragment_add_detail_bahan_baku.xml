@@ -93,14 +93,14 @@
 
             <EditText
                 android:id="@+id/quantity_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="37dp"
+                android:layout_height="58dp"
                 android:layout_marginStart="20dp"
                 android:textColor="@color/black"
-                android:textStyle=""
                 app:layout_constraintBottom_toBottomOf="@+id/spinner_produk"
                 app:layout_constraintStart_toEndOf="@+id/spinner_produk"
-                app:layout_constraintTop_toBottomOf="@+id/detail_bahan" />
+                app:layout_constraintTop_toBottomOf="@+id/detail_bahan"
+                app:layout_constraintVertical_bias="1.0" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_detail_bahan_baku"

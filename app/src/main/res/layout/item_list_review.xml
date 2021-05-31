@@ -19,6 +19,7 @@
             android:id="@+id/review_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:src="@drawable/ic_baseline_chat_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,10 +27,12 @@
 
         <TextView
             android:id="@+id/tv_review"
-            android:layout_width="117dp"
+            android:layout_width="200dp"
             android:layout_height="66dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginLeft="50dp"
             android:lines="3"
+            android:gravity="center"
             android:maxLines="3"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
