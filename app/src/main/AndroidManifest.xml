@@ -17,6 +17,7 @@
             android:name=".ui.detail.DetailTransaction"
             android:theme="@style/Theme.Capstone" />
         <activity android:name=".ui.analyzereview.AnalyzeReviewActivity" />
+        <activity android:name=".ui.analyzesales.AnalyzeSalesActivity" />
         <activity android:name=".ui.ChangePasswordActivity">
             android:theme="@style/Theme.Capstone">
         </activity>
@@ -33,7 +34,6 @@
         <activity android:name=".ui.auth.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
