@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hfad.capstone.R
 import com.hfad.capstone.data.database.CompositionDetailEntity
 import com.hfad.capstone.databinding.ItemListCompositionBinding
+import com.hfad.capstone.databinding.ItemListDetailCompositionBinding
 import java.util.*
 
 class DetailCompositionAdapter : RecyclerView.Adapter<DetailCompositionAdapter.ListViewHolder>() {
@@ -22,7 +23,7 @@ class DetailCompositionAdapter : RecyclerView.Adapter<DetailCompositionAdapter.L
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_composition, parent, false))
+            ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_detail_composition, parent, false))
 
     override fun getItemCount() = listData.size
 
@@ -32,7 +33,7 @@ class DetailCompositionAdapter : RecyclerView.Adapter<DetailCompositionAdapter.L
     }
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val binding = ItemListCompositionBinding.bind(itemView)
+        private val binding = ItemListDetailCompositionBinding.bind(itemView)
         fun bind(data: CompositionDetailEntity) {
             with(binding) {
                 tvCompositionTitle.text = data.composition.compositionName
@@ -41,7 +42,7 @@ class DetailCompositionAdapter : RecyclerView.Adapter<DetailCompositionAdapter.L
         }
 
         init {
-            binding.root.setOnClickListener {
+            binding.button.setOnClickListener {
                 onItemClick?.invoke(listData[adapterPosition])
             }
         }

@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hfad.capstone.MainActivity
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.model.Composition
 import com.hfad.capstone.data.database.CompositionDetailEntity
@@ -50,21 +52,23 @@ class AddDetailBahanBaku : Fragment() {
                     if (list != 0) {
                         GlobalScope.launch(Dispatchers.Main) {
                             sessionManager.fetchProductId()?.let { it1 ->
-                                clientRetrofit.getApiService(requireContext()).insertCompositionDetail(
+                                val response = clientRetrofit.getApiService(requireContext()).insertCompositionDetail(
                                         it1.toInt(),
                                         list,
                                         it1.toInt(),
                                         binding.quantityNumber.text.toString().toFloat()
                                 )
+                                if (response.isSuccessful) {
+                                    setupObservers()
+                                }
                             }
                         }
-                        setupObservers()
                     }
                 }
             })
         }
         binding.btnAddDetailBahan.setOnClickListener {
-            val intent = Intent(activity, DetailActivity::class.java)
+            val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
     }
@@ -97,6 +101,9 @@ class AddDetailBahanBaku : Fragment() {
     private fun getCompositionDetail(response: List<CompositionDetailEntity>){
         val detailCompositionAdapter = DetailCompositionAdapter()
         val  listReview = response
+        detailCompositionAdapter.onItemClick = { selectedData ->
+            delete(selectedData)
+        }
         detailCompositionAdapter.setData(listReview)
         with(binding.rvDetailBahanBaku) {
             layoutManager = LinearLayoutManager(context)
@@ -104,6 +111,27 @@ class AddDetailBahanBaku : Fragment() {
             adapter = detailCompositionAdapter
         }
 
+    }
+
+    private fun delete(compositionDetail:CompositionDetailEntity) {
+        viewModel.search(compositionDetail.composition.compositionName).observe(viewLifecycleOwner, { list ->
+            list.let {
+                if (list != 0) {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        sessionManager.fetchProductId()?.let { it1 ->
+                           val response =  clientRetrofit.getApiService(requireContext()).deleteCompositionDetail(
+                                it1.toInt(),
+                                list
+                            )
+                            if (response.isSuccessful) {
+                                setupObservers()
+                            }
+                        }
+
+                    }
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {

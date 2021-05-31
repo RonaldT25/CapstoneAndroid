@@ -93,10 +93,9 @@
 
             <EditText
                 android:id="@+id/quantity_number"
-                android:layout_width="33dp"
-                android:layout_height="29dp"
-                android:layout_marginStart="34dp"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:textColor="@color/black"
                 android:textStyle=""
                 app:layout_constraintBottom_toBottomOf="@+id/spinner_produk"

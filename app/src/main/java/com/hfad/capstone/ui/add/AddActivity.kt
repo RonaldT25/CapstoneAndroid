@@ -37,7 +37,7 @@ class AddActivity : AppCompatActivity() {
         }
         else if (extras==3){
             val fragment = AddDetailBahanBaku()
-            transaction.replace(R.id.fragment_holder,fragment).addToBackStack(null)
+            transaction.replace(R.id.fragment_holder,fragment)
         }
 
         transaction.commit()

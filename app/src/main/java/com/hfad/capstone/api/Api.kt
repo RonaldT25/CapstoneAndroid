@@ -101,6 +101,11 @@ interface Api {
                                         @Field("productId") productId2:Int,
                                         @Field("amount") amount:Float,) : Response<updateResponse>
 
+    @DELETE("api/users/stores/products/{productId}/compositions/{compositionId}")
+    suspend fun deleteCompositionDetail(@Path("productId") productId:Int,
+                                        @Path("compositionId")compositionId:Int) : Response<updateResponse>
+
+
     @GET(Constants.READSTORE_URL)
     suspend fun readStore() : StoreResponse
 
