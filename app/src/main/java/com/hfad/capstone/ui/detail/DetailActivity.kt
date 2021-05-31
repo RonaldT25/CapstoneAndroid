@@ -7,17 +7,15 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import com.hfad.capstone.MainActivity
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.model.Product
-import com.hfad.capstone.data.database.Resource
 import com.hfad.capstone.databinding.ActivityDetailBinding
 import com.hfad.capstone.helper.SessionManager
 import com.hfad.capstone.ui.add.AddActivity
 import com.hfad.capstone.ui.analyzereview.AnalyzeReviewActivity
+import com.hfad.capstone.ui.analyzesales.AnalyzeSalesActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -65,6 +63,14 @@ class DetailActivity : AppCompatActivity() {
         binding.buttonAnalisaUlasan.setOnClickListener {
             analyze()
         }
+       binding.buttonAnalisaPenjualan.setOnClickListener{
+           analyzeSales()
+       }
+    }
+
+    private fun analyzeSales(){
+        val intent = Intent(this@DetailActivity, AnalyzeSalesActivity::class.java)
+        startActivity(intent)
     }
 
     private fun addDetailBahanBaku() {
