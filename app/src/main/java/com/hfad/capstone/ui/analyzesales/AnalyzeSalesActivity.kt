@@ -26,11 +26,11 @@ class AnalyzeSalesActivity : AppCompatActivity() {
     }
     private fun setViewPager(){
         pagerAdapters = SectionPagerAdapter(supportFragmentManager)
-        pagerAdapters.addFragment(Primary(), "Primary Prediction")
-        pagerAdapters.addFragment(Secondary(), "Secondary Prediction")
+        pagerAdapters.addFragment(Primary(), "Prediksi Penjualan")
+        pagerAdapters.addFragment(Secondary(), "Prediksi dari awal")
         pViewPager.adapter = pagerAdapters
         pTabs.setupWithViewPager(pViewPager)
-        pTabs.getTabAt((0))!!.setText("Primary Prediction")
-        pTabs.getTabAt((1))!!.setText("Secondary Prediction")
+        pTabs.getTabAt((0))!!.setText("Prediksi Penjualan")
+        pTabs.getTabAt((1))!!.setText("Prediksi dari awal")
     }
 }

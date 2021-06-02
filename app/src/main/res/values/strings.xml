@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Capstone</string>
+    <string name="app_name">Tokolitik</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -94,5 +94,5 @@
     <string name="add_bahan">Tambah Bahan</string>
     <string name="detail_transaksi">Detail Transaksi</string>
     <string name="tautan_tokopedia">https://www.tokopedia.com/</string>
-
+    <string name="produk_terjual">Produk Terjual</string>
 </resources>

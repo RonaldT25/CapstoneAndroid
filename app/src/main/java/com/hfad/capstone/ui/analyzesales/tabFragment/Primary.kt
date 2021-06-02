@@ -54,6 +54,7 @@ class Primary : Fragment() {
                     }
                 }
                 binding.progressBar.isVisible = result is Resource.Loading
+                result.data?.let { it1 -> setCompositionPrediction(it1) }
             })
         }
     }
@@ -64,18 +65,24 @@ class Primary : Fragment() {
                 .load(responseSalesEntity.next_6_months)
                 .into(binding.primary)
         }
+        setCompositionPrediction(responseSalesEntity)
+        }
+
+    private fun setCompositionPrediction(responseSalesEntity: ResponseSalesEntity){
         val thread = Thread {
             try {
-                 apiresponse = URL(responseSalesEntity.compositions).readText()
+                apiresponse = URL(responseSalesEntity.compositions).readText()
 
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
         thread.start()
-        setTextView(apiresponse.replace("[","").replace("{","").replace("}","").replace("\u0022","").replace(",","\n"))
-    }
 
+
+        setTextView(apiresponse.replace("[","").replace("{","").replace("}","").replace("\u0022","").replace(",","\n"))
+
+    }
 
 
     private fun setTextView(sales: String) {

@@ -1,6 +1,7 @@
 package com.hfad.capstone.ui.detail
 
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -28,7 +29,6 @@ class DetailActivity : AppCompatActivity() {
         const val EXTRA_PRODUCT = "extra-product"
     }
     private lateinit var binding: ActivityDetailBinding
-    private val viewModel: DetailViewModel by viewModels()
     private var extras: Product? = null
     private lateinit var sessionManager: SessionManager
     private lateinit var clientRetrofit: ClientRetrofit
@@ -41,6 +41,8 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         setDetail()
     }
+
+
 
 
     private fun setDetail() {

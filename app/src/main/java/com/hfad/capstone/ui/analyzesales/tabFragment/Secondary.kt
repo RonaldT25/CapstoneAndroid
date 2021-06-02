@@ -41,6 +41,7 @@ class Secondary : Fragment() {
             viewModel.getReview(it.toInt()).observe(viewLifecycleOwner, Observer {
                     result -> result.let { users -> result.data?.let { getAnalyzeSales(it) } }
                 binding.progressBar.isVisible = result is Resource.Loading
+                result.data?.let { it1 -> setCompositionPrediction(it1) }
             })
         }
     }
@@ -51,6 +52,10 @@ class Secondary : Fragment() {
                 .load(responseSalesEntity.start_next_6_months)
                 .into(binding.secondary)
         }
+        setCompositionPrediction(responseSalesEntity)
+    }
+
+    private fun setCompositionPrediction(responseSalesEntity: ResponseSalesEntity){
         val thread = Thread {
             try {
                 apiresponse = URL(responseSalesEntity.compositions).readText()

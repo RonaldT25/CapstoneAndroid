@@ -65,13 +65,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginTop="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_transaction"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="300dp"
             tools:listitem="@layout/item_list_transaction" />
+    </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/penjualan_text"
