@@ -21,4 +21,7 @@ class AddDetailBahanBakuViewModel @Inject constructor(private val repository: Co
     fun search(searchQuery:String): LiveData<Int>{
         return repository2.search(searchQuery).asLiveData()
     }
+    fun searchUnit(searchQuery:String): LiveData<String>{
+        return repository2.searchUnit(searchQuery).asLiveData()
+    }
 }

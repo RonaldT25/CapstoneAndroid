@@ -17,4 +17,6 @@ interface CompositionDao {
     suspend fun deleteAllCompositions()
     @Query("SELECT compositionId FROM composition WHERE compositionName LIKE :searchQuery")
     fun search(searchQuery:String) : Flow<Int>
+    @Query("SELECT unit FROM composition WHERE compositionName LIKE :searchQuery")
+    fun searchUnit(searchQuery:String) : Flow<String>
 }

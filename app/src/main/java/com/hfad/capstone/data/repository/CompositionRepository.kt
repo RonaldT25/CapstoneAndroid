@@ -33,4 +33,9 @@ class CompositionRepository @Inject constructor(
     fun search(searchQuery:String) : Flow<Int> {
         return compositionDao.search(searchQuery)
     }
+
+    fun searchUnit(searchQuery:String) : Flow<String> {
+        return compositionDao.searchUnit(searchQuery)
+    }
+
 }

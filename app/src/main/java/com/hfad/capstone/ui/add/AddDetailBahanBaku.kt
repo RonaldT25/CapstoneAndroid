@@ -1,25 +1,23 @@
 package com.hfad.capstone.ui.add
 
 import android.R
-import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hfad.capstone.MainActivity
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.model.Composition
 import com.hfad.capstone.data.database.CompositionDetailEntity
 import com.hfad.capstone.databinding.FragmentAddDetailBahanBakuBinding
 import com.hfad.capstone.helper.Adapter.DetailCompositionAdapter
 import com.hfad.capstone.helper.SessionManager
-import com.hfad.capstone.ui.detail.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -82,6 +80,23 @@ class AddDetailBahanBaku : Fragment() {
             result.let { users -> result.data?.let { getCompositions(it) } }
         })
         setSpinner()
+        binding.ACTextView.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {
+                setUnit()
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                setUnit()
+            }
+        })
+
+
     }
 
     private fun setSpinner() {
@@ -95,6 +110,13 @@ class AddDetailBahanBaku : Fragment() {
         for(name in composition){
             list.add(name.compositionName)
         }
+    }
+
+
+    private fun setUnit() {
+        viewModel.searchUnit(binding.ACTextView.text.toString()).observe(viewLifecycleOwner,{
+            list -> binding.satuanBahan.text = list
+        })
     }
 
     private fun getCompositionDetail(response: List<CompositionDetailEntity>){
