@@ -59,8 +59,7 @@ class DetailComposition : AppCompatActivity() {
                     )
                     if (response.isSuccessful) {
                         Toast.makeText(this@DetailComposition, response.body()?.message, Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@DetailComposition, MainActivity::class.java)
-                        startActivity(intent)
+                        this@DetailComposition.finish()
                     }
                 }
             }
@@ -68,14 +67,12 @@ class DetailComposition : AppCompatActivity() {
     }
 
     private fun delete(){
-
         GlobalScope.launch(Dispatchers.Main) {
             extras?.let { it1 ->
                 val response = clientRetrofit.getApiService(this@DetailComposition).deleteComposition(it1.compositionId)
                 if (response.isSuccessful) {
                     Toast.makeText(this@DetailComposition, response.body()?.message, Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@DetailComposition, MainActivity::class.java)
-                    startActivity(intent)
+                    this@DetailComposition.finish()
                 }
             }
         }

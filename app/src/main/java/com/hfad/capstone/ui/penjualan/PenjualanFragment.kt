@@ -68,14 +68,12 @@ class PenjualanFragment : Fragment() {
     private fun getTransactions(response : List<TransactionEntity>) {
         val  listProduct = response
         listProduct.let {
+            transactionAdapter.setData(DataMapper.mapEntitiesToDomain(listProduct))
             transactionAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailTransaction::class.java)
                 intent.putExtra(DetailTransaction.EXTRA_TRANSACTION, selectedData)
                 startActivity(intent)
             }
-
-            transactionAdapter.setData(DataMapper.mapEntitiesToDomain(listProduct))
-
             with(binding.rvTransaction) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)

@@ -34,8 +34,7 @@ class AddBahan : Fragment() {
             if (response != null) {
                 if(response.isSuccessful){
                     Toast.makeText(context, response.body()?.compositionName, Toast.LENGTH_SHORT).show()
-                    val intent = Intent(context, MainActivity::class.java)
-                    startActivity(intent)
+                    activity?.finish()
                 }
             }
         }

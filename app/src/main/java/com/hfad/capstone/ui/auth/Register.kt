@@ -19,7 +19,7 @@ import retrofit2.Response
 class Register : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-    var role = ""
+    var role = "seller"
     private lateinit var clientRetrofit: ClientRetrofit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,15 +29,6 @@ class Register : AppCompatActivity() {
         binding.forgotPassword.setOnClickListener {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
-        }
-
-        binding.role.setOnCheckedChangeListener { _, checkedId ->
-            if (checkedId == R.id.seller) {
-                role = "seller"
-            }
-            if (checkedId == R.id.user) {
-                role = "user"
-            }
         }
 
         binding.btnRegister.setOnClickListener {

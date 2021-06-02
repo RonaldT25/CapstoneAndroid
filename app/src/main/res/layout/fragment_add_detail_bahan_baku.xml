@@ -86,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="none"
-                    android:text="TESTING" />
+                    android:text="@string/bahan" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -99,6 +99,19 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/spinner_produk"
                 app:layout_constraintStart_toEndOf="@+id/spinner_produk"
+                app:layout_constraintTop_toBottomOf="@+id/detail_bahan"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:layout_width="63dp"
+                android:layout_height="53dp"
+                android:layout_marginStart="24dp"
+                android:text="@string/detailCompositionUnit"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/spinner_produk"
+                app:layout_constraintStart_toEndOf="@+id/quantity_number"
                 app:layout_constraintTop_toBottomOf="@+id/detail_bahan"
                 app:layout_constraintVertical_bias="1.0" />
 

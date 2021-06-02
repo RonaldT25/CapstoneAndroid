@@ -95,8 +95,7 @@ class DetailActivity : AppCompatActivity() {
                     )
                         if (response.isSuccessful) {
                             Toast.makeText(this@DetailActivity, response.body()?.message, LENGTH_SHORT).show()
-                            val intent = Intent(this@DetailActivity, MainActivity::class.java)
-                            startActivity(intent)
+                            this@DetailActivity.finish()
                     }
                 }
             }
@@ -109,8 +108,7 @@ class DetailActivity : AppCompatActivity() {
                 val response = clientRetrofit.getApiService(this@DetailActivity).deleteProduct(it1.id)
                 if (response.isSuccessful) {
                     Toast.makeText(this@DetailActivity, response.body()?.message, LENGTH_SHORT).show()
-                    val intent = Intent(this@DetailActivity, MainActivity::class.java)
-                    startActivity(intent)
+                    this@DetailActivity.finish()
                 }
             }
         }

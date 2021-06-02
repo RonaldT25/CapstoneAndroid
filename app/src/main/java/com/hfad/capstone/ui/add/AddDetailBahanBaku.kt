@@ -68,8 +68,7 @@ class AddDetailBahanBaku : Fragment() {
             })
         }
         binding.btnAddDetailBahan.setOnClickListener {
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
+            activity?.finish()
         }
     }
 

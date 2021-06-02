@@ -1,16 +1,16 @@
 package com.hfad.capstone.ui.add
 
 import android.R
-import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.hfad.capstone.MainActivity
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.model.Product
 import com.hfad.capstone.databinding.FragmentAddTransactionBinding
@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -32,6 +33,7 @@ class AddTransaction : Fragment() {
         _binding = FragmentAddTransactionBinding.inflate(inflater, container, false)
         return binding.root
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         clientRetrofit = ClientRetrofit()
@@ -39,6 +41,7 @@ class AddTransaction : Fragment() {
         setButtons()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setButtons() {
         binding.btnAddProduk.setOnClickListener {
             viewModel.search(binding.ACTextView.text.toString()).observe(viewLifecycleOwner, { list ->
@@ -48,12 +51,11 @@ class AddTransaction : Fragment() {
                                 clientRetrofit.getApiService(requireContext()).insertTransaction(
                                         list,
                                         list,
-                                        Calendar.getInstance().time.toString(),
+                                        LocalDateTime.now().toString(),
                                         binding.hargaProduk.text.toString().toInt()
                                 )
                         }
-                        val intent = Intent(activity, MainActivity::class.java)
-                        startActivity(intent)
+                        activity?.finish()
                     }
                 }
             })

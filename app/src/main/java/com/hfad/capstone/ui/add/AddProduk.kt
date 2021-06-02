@@ -36,8 +36,7 @@ class AddProduk : Fragment() {
             if (response != null) {
                 if (response.isSuccessful){
                     Toast.makeText(context, response.body()?.productName, Toast.LENGTH_SHORT).show()
-                    val intent = Intent(context, MainActivity::class.java)
-                    startActivity(intent)
+                    activity?.finish()
                 }
             }
         }

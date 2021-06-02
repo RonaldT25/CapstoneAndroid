@@ -90,4 +90,10 @@ object AppModule {
             Room.databaseBuilder(app, CompositionDetailDatabase::class.java, "composition_detail_database")
                     .build()
 
+    @Provides
+    @Singleton
+    fun provideAnalyzeSalesDatabase(app: Application) : ResponseSalesDatabase =
+        Room.databaseBuilder(app, ResponseSalesDatabase::class.java, "analyze_sales_database")
+            .build()
+
 }

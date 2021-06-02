@@ -1,6 +1,7 @@
 package com.hfad.capstone.api
 
 
+import com.google.gson.JsonObject
 import com.hfad.capstone.data.model.*
 import com.hfad.capstone.helper.Constants
 import retrofit2.Call
@@ -126,6 +127,18 @@ interface Api {
                                         @Field("productId") productId2:Int,
                                         @Field("time") time:String,
                                         @Field("amount") amount:Int,) : Response<updateResponse>
+    @DELETE("api/users/stores/products/{productId}/transactions/{transactionId}")
+    suspend fun deleteTransactions(@Path("productId") productId:Int,@Path("transactionId") transactionId:Int) : Response<updateResponse>
+
+    @PUT("api/users/stores/products/{productId}/transactions/{transactionId}")
+    @FormUrlEncoded
+    suspend fun updateTransactions(@Path("productId") productId:Int,@Path("transactionId") transactionId:Int,@Field("amount") amount:Int) : Response<updateResponse>
+
+
+
+    @GET("api/users/stores/products/{productId}/sales")
+    suspend fun readAnalyzeSales(@Path("productId") productId:Int ) : ResponseSales
+
 
 
 }

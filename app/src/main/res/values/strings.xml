@@ -92,5 +92,7 @@
     <string name="logOut"><u>LOG OUT</u></string>
     <string name="jumlah"><u>0</u></string>
     <string name="add_bahan">Tambah Bahan</string>
+    <string name="detail_transaksi">Detail Transaksi</string>
+    <string name="tautan_tokopedia">https://www.tokopedia.com/</string>
 
 </resources>
