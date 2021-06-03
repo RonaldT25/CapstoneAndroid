@@ -95,4 +95,6 @@
     <string name="detail_transaksi">Detail Transaksi</string>
     <string name="tautan_tokopedia">https://www.tokopedia.com/</string>
     <string name="produk_terjual">Produk Terjual</string>
+    <string name="refresh">Refresh this page if this data is empty</string>
+
 </resources>
