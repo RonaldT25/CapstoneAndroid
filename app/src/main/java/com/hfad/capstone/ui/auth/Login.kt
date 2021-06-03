@@ -46,7 +46,7 @@ class Login : AppCompatActivity() {
             binding.editTextLogin.error = getText(R.string.usernamewarning)
             binding.editTextLogin.requestFocus()
         }
-        if (binding.editTextPassword.text.isEmpty()) {
+        if (binding.editTextPassword.text?.isEmpty() == true) {
             binding.editTextPassword.error = getText(R.string.passwordwarning)
             binding.editTextPassword.requestFocus()
         }

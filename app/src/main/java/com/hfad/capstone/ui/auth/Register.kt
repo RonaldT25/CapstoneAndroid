@@ -4,14 +4,18 @@ import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.se.omapi.Session
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.hfad.capstone.MainActivity
 import com.hfad.capstone.R
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.model.ResponseAuth
 import com.hfad.capstone.databinding.ActivityRegisterBinding
+import com.hfad.capstone.helper.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,11 +25,13 @@ class Register : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     var role = "seller"
     private lateinit var clientRetrofit: ClientRetrofit
+    private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         clientRetrofit = ClientRetrofit()
+        sessionManager = SessionManager(this)
         binding.forgotPassword.setOnClickListener {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
@@ -89,8 +95,28 @@ class Register : AppCompatActivity() {
             setMessage(getText(R.string.register_success))
             setPositiveButton("OK", object : DialogInterface.OnClickListener{
                 override fun onClick(dialog: DialogInterface?, which: Int) {
-                    val intent = Intent(this@Register, Login::class.java)
-                    startActivity(intent)
+                    binding.progressBar.visibility = View.VISIBLE
+                    clientRetrofit.getApiService(this@Register).login(
+                            binding.editTextName.text.toString(),
+                            binding.editTextPassword.text.toString()
+                    ).enqueue(object : Callback<ResponseAuth> {
+                        override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
+                            if (response.isSuccessful){
+                                binding.progressBar.visibility = View.GONE
+                                response.body()?.let { sessionManager.saveAuthToken(it.token) }
+                                val intent = Intent(this@Register, MainActivity::class.java)
+                                startActivity(intent)
+                            }
+                            else{
+
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ResponseAuth>, t: Throwable) {
+
+                        }
+
+                    })
                 }
             })
             setIcon(resources.getDrawable(R.drawable.check, theme))
