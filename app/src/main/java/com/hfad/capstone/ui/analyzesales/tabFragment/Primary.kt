@@ -1,21 +1,31 @@
 package com.hfad.capstone.ui.analyzesales.tabFragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.database.Resource
 import com.hfad.capstone.data.database.ResponseSalesEntity
+import com.hfad.capstone.data.model.Product
+import com.hfad.capstone.data.model.Sales
 import com.hfad.capstone.databinding.FragmentPrimaryBinding
+import com.hfad.capstone.helper.Adapter.ProdukAdapter
+import com.hfad.capstone.helper.Adapter.SalesAdapter
 import com.hfad.capstone.helper.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
-import java.net.URL
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 @AndroidEntryPoint
@@ -25,6 +35,7 @@ class Primary : Fragment() {
     private val viewModel: PrimaryViewModel by viewModels()
     private lateinit var sessionManager: SessionManager
     private lateinit var clientRetrofit: ClientRetrofit
+    private lateinit var salesAdapter: SalesAdapter
     var apiresponse : String =""
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +50,7 @@ class Primary : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         sessionManager = SessionManager(this.requireContext())
         clientRetrofit = ClientRetrofit()
+        salesAdapter = SalesAdapter()
         setupObservers()
 
     }
@@ -69,25 +81,38 @@ class Primary : Fragment() {
         }
 
     private fun setCompositionPrediction(responseSalesEntity: ResponseSalesEntity){
-        val thread = Thread {
-            try {
-                apiresponse = URL(responseSalesEntity.compositions).readText()
+        clientRetrofit.getApiService(requireContext()).readSales(responseSalesEntity.compositions.replace("http://tokolitik.tech:3000/",""))
+                .enqueue(object : Callback<List<Sales>> {
+                    override fun onResponse(call: Call<List<Sales>>, response: Response<List<Sales>>) {
+                        response.body()?.let { getSales(it) }
 
-            } catch (e: Exception) {
-                e.printStackTrace()
+                    }
+
+                    override fun onFailure(call: Call<List<Sales>>, t: Throwable) {
+
+                    }
+
+
+                })
+    }
+
+
+    private fun getSales(response: List<Sales>){
+        val  listProduct = response
+
+        listProduct.let {
+            salesAdapter.onItemClick = { selectedData ->
+
             }
-        }
-        thread.start()
 
+            salesAdapter.setData(listProduct)
 
-        setTextView(apiresponse.replace("[","").replace("{","").replace("}","").replace("\u0022","").replace(",","\n"))
-
-    }
-
-
-    private fun setTextView(sales: String) {
-        binding.textView.text = sales
-    }
+            with(binding.rvPrimary) {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = salesAdapter
+            }
+        }}
 
 
 

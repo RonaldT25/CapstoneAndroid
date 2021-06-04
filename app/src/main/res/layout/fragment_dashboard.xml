@@ -44,13 +44,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/dashobard_text"
         android:layout_width="357dp"
         android:layout_height="57dp"
-        android:layout_marginTop="190dp"
-        android:layout_marginEnd="170dp"
-        android:gravity="center"
+        android:layout_marginTop="192dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="20dp"
         android:paddingTop="20dp"
         android:text="@string/dashobard_text"
         android:textColor="@color/black"
@@ -71,6 +72,7 @@
             android:id="@+id/rv_dashboard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="60dp"
             tools:listitem="@layout/item_list_produk" />
     </androidx.core.widget.NestedScrollView>
 

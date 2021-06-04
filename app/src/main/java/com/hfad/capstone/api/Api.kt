@@ -146,6 +146,9 @@ interface Api {
     @GET("api/users/stores/products/{productId}/sales")
     suspend fun readAnalyzeSales(@Path("productId") productId:Int ) : ResponseSales
 
+    @GET("{String}")
+     fun readSales(@Path("String") String:String ) : Call<List<Sales>>
+
 
 
 }
