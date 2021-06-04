@@ -139,8 +139,23 @@ class Login : AppCompatActivity() {
                 override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
                     binding.progressBar.visibility = View.GONE
                     if (response.body()?.auth == true){
-                        val intent = Intent(this@Login,MainActivity::class.java)
-                        startActivity(intent)
+                        clientRetrofit.getApiService(this@Login).getProfilePublic().enqueue(object : Callback<User>{
+                            override fun onResponse(call: Call<User>, response: Response<User>) {
+                                if (response.body()?.role == "seller"){
+                                    val intent = Intent(this@Login, MainActivity::class.java)
+                                    startActivity(intent)
+                                }
+                                else if (response.body()?.role == "user"){
+                                    val intent = Intent(this@Login, UserActivity::class.java)
+                                    startActivity(intent)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<User>, t: Throwable) {
+
+                            }
+
+                        })
                     }
 
                 }
