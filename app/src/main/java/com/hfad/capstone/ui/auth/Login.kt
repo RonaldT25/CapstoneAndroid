@@ -6,18 +6,24 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.hfad.capstone.MainActivity
 import com.hfad.capstone.R
+import com.hfad.capstone.UserActivity
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.model.ResponseAuth
+import com.hfad.capstone.data.model.User
 import com.hfad.capstone.databinding.ActivityLoginBinding
 import com.hfad.capstone.helper.SessionManager
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@AndroidEntryPoint
 class Login : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
@@ -83,8 +89,23 @@ class Login : AppCompatActivity() {
             setMessage(getText(R.string.login_success))
             setPositiveButton("OK", object : DialogInterface.OnClickListener{
                 override fun onClick(dialog: DialogInterface?, which: Int) {
-                    val intent = Intent(this@Login,MainActivity::class.java)
-                    startActivity(intent)
+                    clientRetrofit.getApiService(this@Login).getProfilePublic().enqueue(object : Callback<User>{
+                        override fun onResponse(call: Call<User>, response: Response<User>) {
+                            if (response.body()?.role == "seller"){
+                                val intent = Intent(this@Login, MainActivity::class.java)
+                                startActivity(intent)
+                            }
+                            else if (response.body()?.role == "user"){
+                                val intent = Intent(this@Login, UserActivity::class.java)
+                                startActivity(intent)
+                            }
+                        }
+
+                        override fun onFailure(call: Call<User>, t: Throwable) {
+
+                        }
+
+                    })
                 }
             })
             setIcon(resources.getDrawable(R.drawable.check, theme))

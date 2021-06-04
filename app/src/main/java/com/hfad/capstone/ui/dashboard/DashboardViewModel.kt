@@ -2,6 +2,7 @@ package com.hfad.capstone.ui.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.hfad.capstone.data.repository.ProductRepository
 import com.hfad.capstone.data.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

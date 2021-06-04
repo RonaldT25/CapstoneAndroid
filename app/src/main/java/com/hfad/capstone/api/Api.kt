@@ -36,6 +36,9 @@ interface Api {
     @GET(Constants.GETPROFILE_URL)
     suspend fun getProfile() : User
 
+    @GET(Constants.GETPROFILE_URL)
+     fun getProfilePublic() : Call<User>
+
     @PUT(Constants.GETPROFILE_URL)
     @FormUrlEncoded
     suspend fun updateProfile(
@@ -58,6 +61,10 @@ interface Api {
 
     @GET(Constants.READPRODUCT_URL)
     suspend fun readProduct() : List<Product>
+
+    @GET(Constants.READPRODUCTPUBLIC_URL)
+     fun readProductPublic() : Call<List<Product>>
+
 
     @PUT("api/users/stores/products/{productId}")
     @FormUrlEncoded

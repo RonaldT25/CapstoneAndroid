@@ -26,4 +26,9 @@
         android:name="com.hfad.capstone.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile"/>
+    <fragment
+        android:id="@+id/navigation_profile_user"
+        android:name="com.hfad.capstone.ui.profile.ProfileUserFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile_user"/>
 </navigation>

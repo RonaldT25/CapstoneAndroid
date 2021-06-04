@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.hfad.capstone.MainActivity
 import com.hfad.capstone.R
+import com.hfad.capstone.UserActivity
 import com.hfad.capstone.api.ClientRetrofit
 import com.hfad.capstone.data.model.ResponseAuth
 import com.hfad.capstone.databinding.ActivityRegisterBinding
@@ -23,7 +24,7 @@ import retrofit2.Response
 class Register : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-    var role = "seller"
+    var role = ""
     private lateinit var clientRetrofit: ClientRetrofit
     private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +33,14 @@ class Register : AppCompatActivity() {
         setContentView(binding.root)
         clientRetrofit = ClientRetrofit()
         sessionManager = SessionManager(this)
+        binding.role.setOnCheckedChangeListener { _, checkedId ->
+            if (checkedId == R.id.seller) {
+                role = "seller"
+            }
+            if (checkedId == R.id.user) {
+                role = "user"
+            }
+        }
         binding.forgotPassword.setOnClickListener {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
@@ -104,11 +113,14 @@ class Register : AppCompatActivity() {
                             if (response.isSuccessful){
                                 binding.progressBar.visibility = View.GONE
                                 response.body()?.let { sessionManager.saveAuthToken(it.token) }
-                                val intent = Intent(this@Register, MainActivity::class.java)
-                                startActivity(intent)
-                            }
-                            else{
-
+                                if (role == "seller"){
+                                    val intent = Intent(this@Register, MainActivity::class.java)
+                                    startActivity(intent)
+                                }
+                                else if (role=="user"){
+                                    val intent = Intent(this@Register, UserActivity::class.java)
+                                    startActivity(intent)
+                                }
                             }
                         }
 

@@ -31,4 +31,6 @@ class ProductRepository @Inject constructor(
     fun search(searchQuery:String) : Flow<Int> {
         return productDao.search(searchQuery)
     }
+
+    fun getProductsPublic() = api.readProductPublic()
 }

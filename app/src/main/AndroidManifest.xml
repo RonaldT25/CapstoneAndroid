@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Capstone.noActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".UserActivity"></activity>
         <activity
             android:name=".ui.detail.DetailTransaction"
             android:theme="@style/Theme.Capstone" />
@@ -34,6 +35,7 @@
         <activity android:name=".ui.auth.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

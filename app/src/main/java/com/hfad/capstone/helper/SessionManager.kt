@@ -10,6 +10,16 @@ class SessionManager (context: Context) {
     companion object {
         const val USER_TOKEN = "user_token"
         const val PRODUCT_ID = "product_id"
+        const val role = "role"
+    }
+    fun saveRole(role: String) {
+        val editor = prefs.edit()
+        editor.putString(role, role)
+        editor.apply()
+    }
+
+    fun fetchRole(): String? {
+        return prefs.getString(role, null)
     }
 
     fun saveAuthToken(token: String) {
