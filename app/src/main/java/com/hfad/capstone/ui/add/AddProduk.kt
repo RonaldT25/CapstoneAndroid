@@ -32,7 +32,8 @@ class AddProduk : Fragment() {
         GlobalScope.launch(Dispatchers.Main) {
             val response = context?.let { clientRetrofit.getApiService(it).createProduct(binding.inputProduk.text.toString(),
                 binding.hargaProduk.text.toString().toInt(),
-                "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80") }
+                "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80",
+            binding.tautan.text.toString()) }
             if (response != null) {
                 if (response.isSuccessful){
                     Toast.makeText(context, response.body()?.productName, Toast.LENGTH_SHORT).show()

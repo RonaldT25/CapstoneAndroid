@@ -57,7 +57,8 @@ interface Api {
     suspend fun createProduct(
                       @Field("productName") productName:String,
                       @Field("price") price:Int,
-                      @Field("image") image:String) : Response<Product>
+                      @Field("image") image:String,
+                      @Field("tokopediaProductUrl") tokopediaProductUrl:String? ) : Response<Product>
 
     @GET(Constants.READPRODUCT_URL)
     suspend fun readProduct() : List<Product>
@@ -71,6 +72,7 @@ interface Api {
     suspend fun updateProduct(@Path("productId") productId:Int,
                       @Field("productName") productName:String,
                       @Field("price") price:Int,
+                              @Field("tokopediaProductUrl") tokopediaProductUrl:String?
                        ) : Response<updateResponse>
 
 

@@ -93,7 +93,8 @@ class DetailActivity : AppCompatActivity() {
                     val response = clientRetrofit.getApiService(this@DetailActivity).updateProduct(
                         it1.id,
                         it1.productName,
-                        binding.editTextHarga.text.toString().toInt()
+                        binding.editTextHarga.text.toString().toInt(),
+                            it1.tokopediaProductUrl
                     )
                         if (response.isSuccessful) {
                             Toast.makeText(this@DetailActivity, response.body()?.message, LENGTH_SHORT).show()
